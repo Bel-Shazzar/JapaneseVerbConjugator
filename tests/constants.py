@@ -125,6 +125,65 @@ class GodanVerbAru:
     provisional_plain_negative = "なければ"
 
 
+class GodanVerbIku:
+    verb = "行く"  # plain positive nonpast
+    verb_class = VerbClass.GODAN
+
+    # Formal Verb Forms
+    polite_positive_nonpast = "行きます"
+    polite_positive_past = "行きました"
+    polite_negative_nonpast = "行きません"
+    polite_negative_past = "行きませんでした"
+
+    # Plain Verb Forms
+    plain_positive_past = "行った"
+    plain_negative_nonpast = "行かない"
+    plain_negative_past = "行った"
+
+    # Te form (gerund)
+    te_form_plain_positive = "行って"
+    te_form_plain_negative = "行なくて"
+    te_form_polite_positive = "行きまして"
+
+    # Conditional Verb Forms
+    conditional_polite = "行きましたら"
+    conditional_plain = "行ったら"
+
+    # Volitional Verb Forms
+    volitional_polite_positive = "行きましょう"
+    volitional_polite_negative = "行かないでしょう"
+    volitional_plain_positive = "行こう"
+    volitional_plain_negative = "行かないだろう"
+
+    # Potential Verb Forms
+    potential_plain_positive = "行ける"
+    potential_plain_negative = "行かない"
+    potential_polite_positive = "行けます"
+    potential_polite_negative = "行けません"
+
+    # Imperative Verb Forms
+    imperative_plain_positive = "行け"
+    imperative_plain_negative = "行くな"
+    imperative_polite_positive = "行ってください"
+    imperative_polite_negative = "行かないでください"
+
+    # Causative Verb Forms
+    causative_plain_positive = "行かせる"
+    causative_plain_negative = "行かせない"
+    causative_polite_positive = "行かせます"
+    causative_polite_negative = "行かせません"
+
+    # Passive Verb Forms
+    passive_plain_positive = "行かれる"
+    passive_plain_negative = "行かれない"
+    passive_polite_positive = "行かれます"
+    passive_polite_negative = "行かれません"
+
+    # Provisional Verb Forms
+    provisional_plain_positive = "行けば"
+    provisional_plain_negative = "行かなければ"
+
+
 class IchidanVerbTaberu:
     # http://www.japaneseverbconjugator.com/VerbDetails.asp?txtVerb=%E9%A3%9F%E3%81%B9%E3%82%8B
     verb = "食べる"  # plain positive nonpast
@@ -415,6 +474,7 @@ class CopulaDa:
 PARAMETER_LIST = [
     ("godan_nomu", GodanVerbNomu),
     ("godan_aru", GodanVerbAru),
+    ("godan_iku", GodanVerbIku),
     ("ichidan_taberu", IchidanVerbTaberu),
     ("irreg_suru", IrregularVerbSuru),
     ("irreg_kuru", IrregularVerbKuru),
