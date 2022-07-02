@@ -1,3 +1,6 @@
+## 2022-07-02 (v0.2.0)
+- fix missing te forms
+
 ## 2022-07-02 (v0.1.5)
 - fix irregular causative polite and negative forms
 
