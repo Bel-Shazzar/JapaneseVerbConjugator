@@ -64,7 +64,7 @@ class PositiveVerbForms:
             return f"{verb_stem}{ending}"
 
     @classmethod
-    def generate_te_form(cls, verb, verb_class):
+    def generate_te_form(cls, verb, verb_class, formality):
         """Utilize base_te_ta_form function to generate the -te form
         of the verb
 
@@ -76,7 +76,18 @@ class PositiveVerbForms:
         Returns:
             str: -te form of the verb
         """
-        return base_te_ta_form(verb, verb_class, TE_PARTICLE, DE_PARTICLE)
+        if formality == Formality.PLAIN:
+            return base_te_ta_form(verb, verb_class, TE_PARTICLE, DE_PARTICLE)
+        else:
+            ending = TE_FORM_POLITE_ENDING
+            if verb_class == VerbClass.IRREGULAR:
+                return handle_irregular_verb(verb, True, ending, ending, ending)
+            else:
+                if verb_class == VerbClass.GODAN:
+                    verb_stem = map_dictionary_to_i_ending(verb)
+                else:
+                    verb_stem = get_verb_stem(verb, verb_class)
+                return f"{verb_stem}{ending}"
 
     @classmethod
     def generate_conditional_form(cls, verb, verb_class, formality):
@@ -215,7 +226,7 @@ class PositiveVerbForms:
                     kuru_kanji_ending=IMPERATIVE_KURU_KANJI_PLAIN_POSITIVE_ENDING,
                 )
             else:
-                return f"{cls.generate_te_form(verb, verb_class)}{KUDASAI}"
+                return f"{cls.generate_te_form(verb, verb_class, Formality.PLAIN)}{KUDASAI}"
         if formality == Formality.PLAIN:
             if verb_class == VerbClass.GODAN:
                 verb_stem = map_dictionary_to_e_ending(verb)
@@ -224,7 +235,7 @@ class PositiveVerbForms:
                 verb_stem = get_verb_stem(verb, verb_class)
                 ending = RO_PARTICLE
         else:
-            verb_stem = cls.generate_te_form(verb, verb_class)
+            verb_stem = cls.generate_te_form(verb, verb_class, Formality.PLAIN)
             ending = KUDASAI
         return f"{verb_stem}{ending}"
 
