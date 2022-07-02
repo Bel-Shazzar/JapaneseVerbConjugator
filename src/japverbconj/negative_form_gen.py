@@ -73,6 +73,37 @@ class NegativeVerbForms:
         return f"{verb_stem}{ending}"
 
     @classmethod
+    def generate_te_form(cls, verb, verb_class, formality):
+        """Generate the negative te form of the verb.
+
+        Args:
+            verb (str): Japanese verb in kana, might contain kanji
+            verb_class (enum): VerbClass Enum representing the verb class
+                to which the verb belongs
+            formality (enum): Formality Enum representing the formality for the conjugated verb
+
+        Returns:
+            str: negative te form of the verb
+        parameter
+        """
+        ending = TE_FORM_NEGATIVE_ENDING
+        if verb_class == VerbClass.IRREGULAR:
+            return handle_irregular_verb(
+                verb,
+                append_stem_particle=False,
+                suru_ending=TE_FORM_SURU_NEGATIVE_ENDING,
+                kuru_ending=TE_FORM_KURU_NEGATIVE_ENDING,
+                kuru_kanji_ending=TE_FORM_KURU_KANJI_NEGATIVE_ENDING,
+            )
+        elif verb == ARU:
+            verb_stem = ""
+        elif verb_class == VerbClass.GODAN:
+            verb_stem = map_dictionary_to_a_ending(verb)
+        else:
+            verb_stem = get_verb_stem(verb, verb_class)
+        return f"{verb_stem}{ending}"
+
+    @classmethod
     def generate_conditional_form(cls, verb, verb_class, formality):
         """Generate the negative conditional form of the verb depending
         on the formality.

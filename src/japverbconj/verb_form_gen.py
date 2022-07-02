@@ -56,7 +56,7 @@ class JapaneseVerbFormGenerator:
 
     @classmethod
     @validate_japanese_verb
-    def generate_te_form(cls, verb, verb_class):
+    def generate_te_form(cls, verb, verb_class, formality, polarity):
         """Utilize base_te_ta_form function to generate the -te form
         of the verb
 
@@ -68,7 +68,9 @@ class JapaneseVerbFormGenerator:
         Returns:
             str: -te form of the verb
         """
-        return cls.positive_verb_forms.generate_te_form(verb, verb_class)
+        if polarity == Polarity.POSITIVE:
+            return cls.positive_verb_forms.generate_te_form(verb, verb_class, formality)
+        return cls.negative_verb_forms.generate_te_form(verb, verb_class, formality)
 
     @classmethod
     @validate_japanese_verb

@@ -65,9 +65,18 @@ class TestPositiveVerbForms(unittest.TestCase):
         self.assertEqual(result, verb.plain_positive_past)
 
     @parameterized.expand(PARAMETER_LIST)
-    def test_te_form(self, _, verb):
-        result = jvfg.generate_te_form(verb.verb, verb.verb_class)
-        self.assertEqual(result, verb.te_form)
+    def test_te_form_plain(self, _, verb):
+        result = jvfg.generate_te_form(
+            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
+        )
+        self.assertEqual(result, verb.te_form_plain_positive)
+
+    @parameterized.expand(PARAMETER_LIST)
+    def test_te_form_polite(self, _, verb):
+        result = jvfg.generate_te_form(
+            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
+        )
+        self.assertEqual(result, verb.te_form_polite_positive)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_conditional_plain(self, _, verb):
@@ -224,6 +233,13 @@ class TestNegativeVerbForms(unittest.TestCase):
             verb.verb, verb.verb_class, Tense.PAST, self.polarity
         )
         self.assertEqual(result, verb.plain_negative_past)
+
+    @parameterized.expand(PARAMETER_LIST)
+    def test_te_form_plain(self, _, verb):
+        result = jvfg.generate_te_form(
+            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
+        )
+        self.assertEqual(result, verb.te_form_plain_negative)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_conditional_plain(self, _, verb):

@@ -21,7 +21,10 @@ class GodanVerbNomu:
     plain_negative_nonpast = "飲まない"  # nai form
     plain_negative_past = "飲まなかった"  # katta form
 
-    te_form = "飲んで"
+    # Te form (gerund)
+    te_form_plain_positive = "飲んで"
+    te_form_plain_negative = "飲まなくて"
+    te_form_polite_positive = "飲みまして"
 
     # Conditional Verb Forms
     conditional_polite = "飲みましたら"  # tara form
@@ -78,7 +81,10 @@ class GodanVerbAru:
     plain_negative_nonpast = "ない"
     plain_negative_past = "なかった"
 
-    te_form = "あって"
+    # Te form (gerund)
+    te_form_plain_positive = "あって"
+    te_form_plain_negative = "なくて"
+    te_form_polite_positive = "ありまして"
 
     # Conditional Verb Forms
     conditional_polite = "ありましたら"
@@ -135,7 +141,10 @@ class IchidanVerbTaberu:
     plain_negative_nonpast = "食べない"  # nai form
     plain_negative_past = "食べなかった"  # katta form
 
-    te_form = "食べて"
+    # Te form (gerund)
+    te_form_plain_positive = "食べて"
+    te_form_plain_negative = "食べなくて"
+    te_form_polite_positive = "食べまして"
 
     # Conditional Verb Forms
     conditional_polite = "食べましたら"  # tara form
@@ -192,7 +201,10 @@ class IrregularVerbSuru:
     plain_negative_nonpast = "勉強しない"  # nai form
     plain_negative_past = "勉強しなかった"  # katta form
 
-    te_form = "勉強して"
+    # Te form (gerund)
+    te_form_plain_positive = "勉強して"
+    te_form_plain_negative = "勉強しなくて"
+    te_form_polite_positive = "勉強しまして"
 
     # Conditional Verb Forms
     conditional_plain_positive = "勉強したら"  # tara form
@@ -258,7 +270,10 @@ class IrregularVerbKuru:
     plain_negative_nonpast = "こない"  # nai form
     plain_negative_past = "こなかった"  # katta form
 
-    te_form = "きて"
+    # Te form (gerund)
+    te_form_plain_positive = "きて"
+    te_form_plain_negative = "こなくて"
+    te_form_polite_positive = "きまして"
 
     # Conditional Verb Forms
     conditional_plain_positive = "きたら"  # tara form
@@ -324,7 +339,10 @@ class IrregularVerbKuruKanji:
     plain_negative_nonpast = "来ない"  # nai form
     plain_negative_past = "来なかった"  # katta form
 
-    te_form = "来て"
+    # Te form (gerund)
+    te_form_plain_positive = "来て"
+    te_form_plain_negative = "来なくて"
+    te_form_polite_positive = "来まして"
 
     # Conditional Verb Forms
     conditional_plain_positive = "来たら"  # tara form
