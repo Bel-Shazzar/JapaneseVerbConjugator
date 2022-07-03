@@ -163,7 +163,10 @@ def base_te_ta_form(verb, verb_class, regular_ending, dakuten_ending):
         if verb_class == VerbClass.ICHIDAN:
             verb_ending = regular_ending
         else:
-            if particle_ending in [RU_PARTICLE, TSU_PARTICLE, U_PARTICLE]:
+            if particle_ending in [RU_PARTICLE, TSU_PARTICLE, U_PARTICLE] or verb in [
+                IKU,
+                IKU_KANJI,
+            ]:
                 verb_ending = f"{CHISAI_TSU_PARTICLE}{regular_ending}"
             elif particle_ending in [BU_PARTICLE, MU_PARTICLE, NU_PARTICLE]:
                 verb_ending = f"{N_PARTICLE}{dakuten_ending}"
