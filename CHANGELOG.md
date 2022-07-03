@@ -1,3 +1,6 @@
+## 2022-07-03 (v0.2.1)
+- fix exceptions for verb iku
+
 ## 2022-07-02 (v0.2.0)
 - fix missing te forms
 
