@@ -138,11 +138,11 @@ class GodanVerbIku:
     # Plain Verb Forms
     plain_positive_past = "行った"
     plain_negative_nonpast = "行かない"
-    plain_negative_past = "行った"
+    plain_negative_past = "行かなかった"
 
     # Te form (gerund)
     te_form_plain_positive = "行って"
-    te_form_plain_negative = "行なくて"
+    te_form_plain_negative = "行かなくて"
     te_form_polite_positive = "行きまして"
 
     # Conditional Verb Forms
