@@ -1,6 +1,8 @@
 KUDASAI = "ください"
 KURU_KANJI = "来"
 ARU = "ある"
+IKU = "いく"
+IKU_KANJI = "行く"
 
 # IRREGULAR VERB ENDINGS
 SURU_ENDING = "する"

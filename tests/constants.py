@@ -157,7 +157,7 @@ class GodanVerbIku:
 
     # Potential Verb Forms
     potential_plain_positive = "行ける"
-    potential_plain_negative = "行かない"
+    potential_plain_negative = "行けない"
     potential_polite_positive = "行けます"
     potential_polite_negative = "行けません"
 
