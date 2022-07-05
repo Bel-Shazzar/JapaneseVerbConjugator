@@ -1,4 +1,4 @@
-from enum import Enum
+from enum import Enum, auto
 
 
 class Formality(Enum):
@@ -21,3 +21,22 @@ class VerbClass(Enum):
     ICHIDAN = 2
     IRREGULAR = 3
     NONIRREGULAR = 4
+
+
+class BaseForm(Enum):
+    PLAIN = auto()
+    POLITE = auto()
+    TE = auto()
+    CONDITIONAL = auto()
+    VOLITIONAL = auto()
+    POTENTIAL = auto()
+    IMPERATIVE = auto()
+    PROVISIONAL = auto()
+    CAUSATIVE = auto()
+    PASSIVE = auto()
+
+
+class IrregularVerb(Enum):
+    SURU = "する"
+    KURU = "くる"
+    KURU_KANJI = "来る"
