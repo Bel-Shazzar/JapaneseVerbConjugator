@@ -1,4 +1,5 @@
-from .constants.enumerated_types import VerbClass
+from .constants.irregular_verb_forms import get_irregular_conjugation
+from .constants.enumerated_types import *
 from .constants.particle_constants import *
 from .constants.verb_ending_constants import *
 from .exceptions import NonIrregularVerbError
@@ -57,10 +58,10 @@ def get_ending_particle(verb, verb_class):
 
 def handle_irregular_verb(
     verb,
-    append_stem_particle=False,
-    suru_ending=None,
-    kuru_ending=None,
-    kuru_kanji_ending=None,
+    base_form: BaseForm,
+    formality: Formality = Formality.PLAIN,
+    tense: Tense = Tense.NONPAST,
+    polarity: Polarity = Polarity.POSITIVE,
 ):
     """Handles irregular verb conjugations depending on suru or kuru verb type.
     Isolates logic of irregular verbs.
@@ -83,22 +84,10 @@ def handle_irregular_verb(
             on verb conjugation
     """
     verb_stem, particle_ending = splice_verb(verb, VerbClass.IRREGULAR)
-    if particle_ending not in [SURU_ENDING, KURU_ENDING, KURU_KANJI_ENDING]:
-        raise NonIrregularVerbError("Non-Irregular Verb Ending Found", particle_ending)
-    stem_particle = ""
-    if particle_ending == SURU_ENDING:
-        if append_stem_particle:
-            stem_particle = SHI_PARTICLE
-        ending = suru_ending
-    elif particle_ending == KURU_ENDING:
-        if append_stem_particle:
-            stem_particle = KI_PARTICLE
-        ending = kuru_ending
-    else:
-        if append_stem_particle:
-            stem_particle = KURU_KANJI
-        ending = kuru_kanji_ending
-    return f"{verb_stem}{stem_particle}{ending}"
+    ending = get_irregular_conjugation(
+        particle_ending, base_form, formality, tense, polarity
+    )
+    return f"{verb_stem}{ending}"
 
 
 def generate_nai_form(verb, verb_class, is_regular_nai):
@@ -123,12 +112,14 @@ def generate_nai_form(verb, verb_class, is_regular_nai):
     verb_stem, particle_ending = splice_verb(verb, verb_class)
     stem_particle = ""
     if verb_class == VerbClass.IRREGULAR:
-        if particle_ending == SURU_ENDING:
+        if particle_ending == IrregularVerb.SURU.value:
             stem_particle = SHI_PARTICLE
-        elif particle_ending == KURU_ENDING:
+        elif particle_ending == IrregularVerb.KURU.value:
             stem_particle = KO_PARTICLE
-        else:
+        elif particle_ending == IrregularVerb.KURU_KANJI:
             stem_particle = KURU_KANJI
+        else:
+            raise NonIrregularVerbError("Non-Irregular Verb Ending Found", verb)
     else:
         if verb_class == VerbClass.GODAN:
             verb_stem = map_dictionary_to_a_ending(verb)

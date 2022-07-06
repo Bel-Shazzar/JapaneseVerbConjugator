@@ -5,7 +5,6 @@ from .constants.verb_ending_constants import *
 from .utils import (
     base_te_ta_form,
     get_verb_stem,
-    handle_irregular_verb,
     map_dictionary_to_a_ending,
     map_dictionary_to_e_ending,
     map_dictionary_to_i_ending,
@@ -54,14 +53,11 @@ class PositiveVerbForms:
         else:
             ending = MASU_POSITIVE_PAST
 
-        if verb_class == VerbClass.IRREGULAR:
-            return handle_irregular_verb(verb, True, ending, ending, ending)
+        if verb_class == VerbClass.GODAN:
+            verb_stem = map_dictionary_to_i_ending(verb)
         else:
-            if verb_class == VerbClass.GODAN:
-                verb_stem = map_dictionary_to_i_ending(verb)
-            else:
-                verb_stem = get_verb_stem(verb, verb_class)
-            return f"{verb_stem}{ending}"
+            verb_stem = get_verb_stem(verb, verb_class)
+        return f"{verb_stem}{ending}"
 
     @classmethod
     def generate_te_form(cls, verb, verb_class, formality):
@@ -80,14 +76,11 @@ class PositiveVerbForms:
             return base_te_ta_form(verb, verb_class, TE_PARTICLE, DE_PARTICLE)
         else:
             ending = TE_FORM_POLITE_ENDING
-            if verb_class == VerbClass.IRREGULAR:
-                return handle_irregular_verb(verb, True, ending, ending, ending)
-            else:
-                if verb_class == VerbClass.GODAN:
-                    verb_stem = map_dictionary_to_i_ending(verb)
-                else:
-                    verb_stem = get_verb_stem(verb, verb_class)
-                return f"{verb_stem}{ending}"
+        if verb_class == VerbClass.GODAN:
+            verb_stem = map_dictionary_to_i_ending(verb)
+        else:
+            verb_stem = get_verb_stem(verb, verb_class)
+        return f"{verb_stem}{ending}"
 
     @classmethod
     def generate_conditional_form(cls, verb, verb_class, formality):
@@ -127,23 +120,7 @@ class PositiveVerbForms:
             str: positive volitional form of the verb based on the formality
             parameter
         """
-        if verb_class == VerbClass.IRREGULAR:
-            if formality == Formality.PLAIN:
-                return handle_irregular_verb(
-                    verb,
-                    suru_ending=VOLITIONAL_SURU_ENDING,
-                    kuru_ending=VOLITIONAL_KURU_ENDING,
-                    kuru_kanji_ending=VOLITIONAL_KURU_KANJI_ENDING,
-                )
-            else:
-                return handle_irregular_verb(
-                    verb,
-                    suru_ending=VOLITIONAL_POLITE_SURU_ENDING,
-                    kuru_ending=VOLITIONAL_POLITE_KURU_ENDING,
-                    kuru_kanji_ending=VOLITIONAL_POLITE_KURU_KANJI_ENDING,
-                )
-
-        elif verb_class == VerbClass.GODAN:
+        if verb_class == VerbClass.GODAN:
             if formality == Formality.PLAIN:
                 verb_stem = map_dictionary_to_o_ending(verb)
                 ending = U_PARTICLE
@@ -174,18 +151,6 @@ class PositiveVerbForms:
             str: positive potential form of the verb based on the specified formality
         parameter
         """
-        if verb_class == VerbClass.IRREGULAR:
-            if formality == Formality.PLAIN:
-                suru_ending = POTENTIAL_SURU_PLAIN_POSITIVE_ENDING
-                kuru_ending = POTENTIAL_KURU_PLAIN_POSITIVE_ENDING
-                kuru_kanji_ending = POTENTIAL_KURU_KANJI_PLAIN_POSITIVE_ENDING
-            else:
-                suru_ending = POTENTIAL_SURU_POLITE_POSITIVE_ENDING
-                kuru_ending = POTENTIAL_KURU_POLITE_POSITIVE_ENDING
-                kuru_kanji_ending = POTENTIAL_KURU_KANJI_POLITE_POSITIVE_ENDING
-            return handle_irregular_verb(
-                verb, False, suru_ending, kuru_ending, kuru_kanji_ending
-            )
         if verb_class == VerbClass.GODAN:
             if formality == Formality.PLAIN:
                 verb_stem = map_dictionary_to_e_ending(verb)
@@ -217,16 +182,6 @@ class PositiveVerbForms:
             str: positive imperative form based on the specified formality
         parameter
         """
-        if verb_class == VerbClass.IRREGULAR:
-            if formality == Formality.PLAIN:
-                return handle_irregular_verb(
-                    verb,
-                    suru_ending=IMPERATIVE_SURU_PLAIN_POSITIVE_ENDING,
-                    kuru_ending=IMPERATIVE_KURU_PLAIN_POSITIVE_ENDING,
-                    kuru_kanji_ending=IMPERATIVE_KURU_KANJI_PLAIN_POSITIVE_ENDING,
-                )
-            else:
-                return f"{cls.generate_te_form(verb, verb_class, Formality.PLAIN)}{KUDASAI}"
         if formality == Formality.PLAIN:
             if verb_class == VerbClass.GODAN:
                 verb_stem = map_dictionary_to_e_ending(verb)
@@ -256,19 +211,6 @@ class PositiveVerbForms:
             str: positive provisional form based on the specified formality
         parameter
         """
-        if verb_class == VerbClass.IRREGULAR:
-            if formality == Formality.PLAIN:
-                suru_ending = PROVISIONAL_SURU_PLAIN_POSITIVE_ENDING
-                kuru_ending = PROVISIONAL_KURU_PLAIN_POSITIVE_ENDING
-                kuru_kanji_ending = PROVISIONAL_KURU_KANJI_PLAIN_POSITIVE_ENDING
-            else:
-                suru_ending = PROVISIONAL_SURU_POLITE_POSITIVE_ENDING
-                kuru_ending = PROVISIONAL_KURU_POLITE_POSITIVE_ENDING
-                kuru_kanji_ending = PROVISIONAL_KURU_KANJI_POLITE_POSITIVE_ENDING
-            return handle_irregular_verb(
-                verb, False, suru_ending, kuru_ending, kuru_kanji_ending
-            )
-        # assuming godan verb
         if verb_class == VerbClass.GODAN:
             verb_stem = map_dictionary_to_e_ending(verb)
             ending = BA_PARTICLE
@@ -293,27 +235,10 @@ class PositiveVerbForms:
             str: positive causative form based on the specified formality
         parameter
         """
-        if verb_class == VerbClass.IRREGULAR:
-            if formality == Formality.PLAIN:
-                return handle_irregular_verb(
-                    verb,
-                    suru_ending=CAUSATIVE_PLAIN_POSITIVE_SURU_ENDING,
-                    kuru_ending=CAUSATIVE_PLAIN_POSITIVE_KURU_ENDING,
-                    kuru_kanji_ending=CAUSATIVE_PLAIN_POSITIVE_KURU_KANJI_ENDING,
-                )
-            else:
-                return handle_irregular_verb(
-                    verb,
-                    suru_ending=CAUSATIVE_POLITE_POSITIVE_SURU_ENDING,
-                    kuru_ending=CAUSATIVE_POLITE_POSITIVE_KURU_ENDING,
-                    kuru_kanji_ending=CAUSATIVE_POLITE_POSITIVE_KURU_KANJI_ENDING,
-                )
-
         if verb_class == VerbClass.GODAN:
             verb_stem = f"{map_dictionary_to_a_ending(verb)}{SE_PARTICLE}"
         else:
             verb_stem = f"{get_verb_stem(verb, verb_class)}{SA_PARTICLE}{SE_PARTICLE}"
-
         if formality == Formality.PLAIN:
             ending = RU_PARTICLE
         else:
@@ -336,21 +261,6 @@ class PositiveVerbForms:
             str: positive passive form based on the specified formality
         parameter
         """
-        if verb_class == VerbClass.IRREGULAR:
-            if formality == Formality.PLAIN:
-                return handle_irregular_verb(
-                    verb,
-                    suru_ending=PASSIVE_SURU_PLAIN_POSITIVE_ENDING,
-                    kuru_ending=PASSIVE_KURU_PLAIN_POSITIVE_ENDING,
-                    kuru_kanji_ending=PASSIVE_KURU_KANJI_PLAIN_POSITIVE_ENDING,
-                )
-            else:
-                return handle_irregular_verb(
-                    verb,
-                    suru_ending=PASSIVE_SURU_POLITE_POSITIVE_ENDING,
-                    kuru_ending=PASSIVE_KURU_POLITE_POSITIVE_ENDING,
-                    kuru_kanji_ending=PASSIVE_KURU_KANJI_POLITE_POSITIVE_ENDING,
-                )
         if verb_class == VerbClass.GODAN:
             verb_stem = map_dictionary_to_a_ending(verb)
             if formality == Formality.PLAIN:

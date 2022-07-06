@@ -1,28 +1,6 @@
 from enum import Enum, auto
 
 
-class Formality(Enum):
-    PLAIN = 1
-    POLITE = 2
-
-
-class Polarity(Enum):
-    POSITIVE = 1
-    NEGATIVE = 2
-
-
-class Tense(Enum):
-    PAST = 1
-    NONPAST = 2
-
-
-class VerbClass(Enum):
-    GODAN = 1
-    ICHIDAN = 2
-    IRREGULAR = 3
-    NONIRREGULAR = 4
-
-
 class BaseForm(Enum):
     PLAIN = auto()
     POLITE = auto()
@@ -36,7 +14,38 @@ class BaseForm(Enum):
     PASSIVE = auto()
 
 
+class Formality(Enum):
+    PLAIN = BaseForm.PLAIN.value
+    POLITE = BaseForm.POLITE.value
+
+
+class Polarity(Enum):
+    POSITIVE = auto()
+    NEGATIVE = auto()
+
+
+class Tense(Enum):
+    PAST = auto()
+    NONPAST = auto()
+
+
+class VerbClass(Enum):
+    GODAN = auto()
+    ICHIDAN = auto()
+    IRREGULAR = auto()
+    NONIRREGULAR = auto()
+
+
 class IrregularVerb(Enum):
     SURU = "する"
     KURU = "くる"
     KURU_KANJI = "来る"
+
+    @classmethod
+    def values(cls):
+        return [verb.value for verb in cls]
+
+
+if __name__ == "__main__":
+    for element in IrregularVerb.values():
+        print(element)

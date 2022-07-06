@@ -2,6 +2,7 @@ KUDASAI = "ください"
 ARU = "ある"
 IKU = "いく"
 IKU_KANJI = "行く"
+KURU_KANJI = "来"
 
 # (POLITE) MASU FORM ENDINGS
 MASU_POSITIVE_NONPAST = "ます"
