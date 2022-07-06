@@ -57,7 +57,7 @@ def get_ending_particle(verb, verb_class):
 
 
 def handle_irregular_verb(
-    verb,
+    verb: str,
     base_form: BaseForm,
     formality: Formality = Formality.PLAIN,
     tense: Tense = Tense.NONPAST,
@@ -68,16 +68,10 @@ def handle_irregular_verb(
 
     Args:
         verb (str): Japanese verb in kana, might contain kanji
-        append_stem_particle (bool): verb base particle depends on if the verb is a
-            suru or kuru verb. し particle is appended to suru verbs and き is appended
-            to kuru verbs. Not all conjugations require these particles to be appended
-            to the verb stem.
-        suru_ending (:obj: str, optional): suru verb ending based on the conjugation form.
-            Defaults to None.
-        kuru_ending (:obj: str, optional): kuru verb ending based on the conjugation form.
-            Defaults to None.
-        kuru_kanji_ending (:obj: str, optional): kuru as kanji verb ending based on the conjugation form.
-            Defaults to None.
+        base_form (enum): BaseForm enum, representing which form is requested
+        formality (enum, optional): Formality enum, determining the formality
+        tense (enum, optional): Tense enum, determining the tense
+        polarity (enum, optional): Polarity enum, determining the polarity
 
     Returns:
         str: irregular verb with appropriate particles and ending attached depending
@@ -90,7 +84,7 @@ def handle_irregular_verb(
     return f"{verb_stem}{ending}"
 
 
-def generate_nai_form(verb, verb_class, is_regular_nai):
+def generate_nai_form(verb, verb_class: VerbClass, is_regular_nai: bool):
     """Generates the nai form of a Japanese verb
 
     Args:
@@ -109,24 +103,13 @@ def generate_nai_form(verb, verb_class, is_regular_nai):
         return f"{verb}{NAI_ENDING}"
     if verb == ARU:
         return NAI_ENDING
-    verb_stem, particle_ending = splice_verb(verb, verb_class)
-    stem_particle = ""
-    if verb_class == VerbClass.IRREGULAR:
-        if particle_ending == IrregularVerb.SURU.value:
-            stem_particle = SHI_PARTICLE
-        elif particle_ending == IrregularVerb.KURU.value:
-            stem_particle = KO_PARTICLE
-        elif particle_ending == IrregularVerb.KURU_KANJI:
-            stem_particle = KURU_KANJI
-        else:
-            raise NonIrregularVerbError("Non-Irregular Verb Ending Found", verb)
-    else:
-        if verb_class == VerbClass.GODAN:
-            verb_stem = map_dictionary_to_a_ending(verb)
-    return f"{verb_stem}{stem_particle}{NAI_ENDING}"
+    verb_stem = get_verb_stem(verb, verb_class)
+    if verb_class == VerbClass.GODAN:
+        verb_stem = map_dictionary_to_a_ending(verb)
+    return f"{verb_stem}{NAI_ENDING}"
 
 
-def base_te_ta_form(verb, verb_class, regular_ending, dakuten_ending):
+def base_te_ta_form(verb, verb_class:VerbClass, regular_ending:str, dakuten_ending:str):
     """Handle the formation of the -te / -ta form for verbs belonging to
     any verb class. Logic for both forms follows similar logic but differs
     between (-te, -de) and (-ta, -da) based on the last particle of a Godan
