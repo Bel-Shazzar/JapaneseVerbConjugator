@@ -7,6 +7,7 @@ from src.japverbconj.constants.enumerated_types import (
     Tense,
     VerbClass,
 )
+from src.japverbconj.constants.irregular_verb_forms import NoConjugationError
 from src.japverbconj.verb_form_gen import JapaneseVerbFormGenerator as jvfg
 from src.japverbconj.verb_form_gen import *
 
@@ -242,18 +243,21 @@ class TestNegativeVerbForms(unittest.TestCase):
         self.assertEqual(result, verb.te_form_plain_negative)
 
     @parameterized.expand(PARAMETER_LIST)
-    def test_conditional_plain(self, _, verb):
-        if verb.verb_class is not VerbClass.IRREGULAR:
-            self.skipTest("Not Required for Non-Irregular Verbs")
+    def test_conditional_plain_negative(self, _, verb):
+        if verb.verb_class != VerbClass.IRREGULAR:
+            self.skipTest("Not required for regular Verbs")
         result = jvfg.generate_conditional_form(
-            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
+            verb.verb,
+            verb.verb_class,
+            formality=Formality.PLAIN,
+            polarity=self.polarity,
         )
         self.assertEqual(result, verb.conditional_plain_negative)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_conditional_polite(self, _, verb):
         if verb.verb_class is not VerbClass.IRREGULAR:
-            self.skipTest("Not Required for Non-Irregular Verbs")
+            self.skipTest("Not required for regular Verbs")
         result = jvfg.generate_conditional_form(
             verb.verb, verb.verb_class, Formality.POLITE, self.polarity
         )
@@ -344,6 +348,18 @@ class TestNegativeVerbForms(unittest.TestCase):
             verb.verb, verb.verb_class, Formality.POLITE, self.polarity
         )
         self.assertEqual(result, verb.passive_polite_negative)
+
+    @parameterized.expand(
+        [tup for tup in PARAMETER_LIST if tup[1].verb_class == VerbClass.IRREGULAR]
+    )
+    def test_irregular_errors(self, _, verb):
+        with self.assertRaises(NoConjugationError, msg=verb.verb):
+            jvfg.generate_te_form(
+                verb=verb.verb,
+                verb_class=verb.verb_class,
+                formality=Formality.POLITE,
+                polarity=Polarity.NEGATIVE,
+            )
 
 
 class TestCopula(unittest.TestCase):
