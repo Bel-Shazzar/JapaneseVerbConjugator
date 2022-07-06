@@ -1,4 +1,3 @@
-# Local modules
 from .constants.enumerated_types import Formality, Tense, VerbClass
 from .constants.particle_constants import *
 from .constants.verb_ending_constants import *
@@ -17,7 +16,7 @@ from .utils import (
 # ---------------------------------------------------------- #
 class PositiveVerbForms:
     @classmethod
-    def generate_plain_form(cls, verb, verb_class, tense):
+    def generate_plain_form(cls, verb: str, verb_class: VerbClass, tense: Tense):
         """Generate the positive polite form of the verb depending
         on the tense.
 
@@ -35,7 +34,7 @@ class PositiveVerbForms:
         return base_te_ta_form(verb, verb_class, TA_PARTICLE, DA_PARTICLE)
 
     @classmethod
-    def generate_polite_form(cls, verb, verb_class, tense):
+    def generate_polite_form(cls, verb: str, verb_class: VerbClass, tense: Tense):
         """Generate the positive polite form of the verb depending
         on the tense.
 
@@ -60,7 +59,7 @@ class PositiveVerbForms:
         return f"{verb_stem}{ending}"
 
     @classmethod
-    def generate_te_form(cls, verb, verb_class, formality):
+    def generate_te_form(cls, verb: str, verb_class: VerbClass, formality: Formality):
         """Utilize base_te_ta_form function to generate the -te form
         of the verb
 
@@ -83,7 +82,9 @@ class PositiveVerbForms:
         return f"{verb_stem}{ending}"
 
     @classmethod
-    def generate_conditional_form(cls, verb, verb_class, formality):
+    def generate_conditional_form(
+        cls, verb: str, verb_class: VerbClass, formality: Formality
+    ):
         """Generate the positive conditional form of the verb depending
         on the level of formality.
 
@@ -105,7 +106,9 @@ class PositiveVerbForms:
         return f"{verb_stem}{RA_PARTICLE}"
 
     @classmethod
-    def generate_volitional_form(cls, verb, verb_class, formality):
+    def generate_volitional_form(
+        cls, verb: str, verb_class: VerbClass, formality: Formality
+    ):
         """Generate the positive volitional form of the verb depending
         on the level of formality.
 
@@ -136,7 +139,9 @@ class PositiveVerbForms:
         return f"{verb_stem}{ending}"
 
     @classmethod
-    def generate_potential_form(cls, verb, verb_class, formality):
+    def generate_potential_form(
+        cls, verb: str, verb_class: VerbClass, formality: Formality
+    ):
         """Generate the positive potential form of the verb depending
         on the level of formality.
 
@@ -167,7 +172,9 @@ class PositiveVerbForms:
         return f"{verb_stem}{ending}"
 
     @classmethod
-    def generate_imperative_form(cls, verb, verb_class, formality):
+    def generate_imperative_form(
+        cls, verb: str, verb_class: VerbClass, formality: Formality
+    ):
         """Generate the positive imperative form of the verb depending
         on the level of formality.
 
@@ -195,7 +202,7 @@ class PositiveVerbForms:
         return f"{verb_stem}{ending}"
 
     @classmethod
-    def generate_provisional_form(cls, verb, verb_class, formality=None):
+    def generate_provisional_form(cls, verb: str, verb_class: VerbClass):
         """Generate the positive provisional form of the verb depending
         on the level of formality. No formality parameter required for
         non-irregular verbs.
@@ -204,8 +211,6 @@ class PositiveVerbForms:
             verb (str): Japanese verb in kana, might contain kanji
             verb_class (enum): VerbClass Enum representing the verb class
                 to which the verb belongs
-            formality (:obj: enum, optional): Formality Enum representing the formality class
-                for the conjugated verb. Defaults to None.
 
         Returns:
             str: positive provisional form based on the specified formality
@@ -220,7 +225,9 @@ class PositiveVerbForms:
         return f"{verb_stem}{ending}"
 
     @classmethod
-    def generate_causative_form(cls, verb, verb_class, formality):
+    def generate_causative_form(
+        cls, verb: str, verb_class: VerbClass, formality: Formality
+    ):
         """Generate the positive causative form of the verb depending
         on the level of formality.
 
@@ -246,7 +253,9 @@ class PositiveVerbForms:
         return f"{verb_stem}{ending}"
 
     @classmethod
-    def generate_passive_form(cls, verb, verb_class, formality):
+    def generate_passive_form(
+        cls, verb: str, verb_class: VerbClass, formality: Formality
+    ):
         """Generate the positive passive form of the verb depending
         on the level of formality.
 

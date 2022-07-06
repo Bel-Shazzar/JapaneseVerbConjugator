@@ -95,7 +95,9 @@ class JapaneseVerbFormGenerator:
 
     @classmethod
     @validate_japanese_verb
-    def generate_conditional_form(cls, verb, verb_class, formality, polarity):
+    def generate_conditional_form(
+        cls, verb, verb_class: VerbClass, formality: Formality, polarity: Polarity
+    ):
         """Generate the conditional form of the verb depending on the formality.
 
         Args:
@@ -236,9 +238,7 @@ class JapaneseVerbFormGenerator:
                 verb, BaseForm.PROVISIONAL, formality=formality, polarity=polarity
             )
         if polarity == Polarity.POSITIVE:
-            return cls.positive_verb_forms.generate_provisional_form(
-                verb, verb_class, formality
-            )
+            return cls.positive_verb_forms.generate_provisional_form(verb, verb_class)
         return cls.negative_verb_forms.generate_provisional_form(
             verb, verb_class, formality
         )

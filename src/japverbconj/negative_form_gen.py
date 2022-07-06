@@ -1,4 +1,4 @@
-from .constants.enumerated_types import BaseForm, Formality, Polarity, Tense, VerbClass
+from .constants.enumerated_types import Formality, Tense, VerbClass
 from .constants.particle_constants import *
 from .constants.verb_ending_constants import *
 from .utils import (
@@ -15,7 +15,7 @@ from .utils import (
 # ---------------------------------------------------------- #
 class NegativeVerbForms:
     @classmethod
-    def generate_plain_form(cls, verb, verb_class, tense):
+    def generate_plain_form(cls, verb: str, verb_class: VerbClass, tense: Tense):
         """Generate the negative plain form of the verb depending
         on the tense.
 
@@ -36,7 +36,7 @@ class NegativeVerbForms:
             return f"{nai_form[:-1]}{KATTA_ENDING}"
 
     @classmethod
-    def generate_polite_form(cls, verb, verb_class, tense):
+    def generate_polite_form(cls, verb: str, verb_class: VerbClass, tense: Tense):
         """Generate the negative polite form of the verb depending
         on the tense.
 
@@ -61,7 +61,7 @@ class NegativeVerbForms:
         return f"{verb_stem}{ending}"
 
     @classmethod
-    def generate_te_form(cls, verb, verb_class, formality):
+    def generate_te_form(cls, verb: str, verb_class: VerbClass, formality: Formality):
         """Generate the negative te form of the verb.
 
         Args:
@@ -84,7 +84,9 @@ class NegativeVerbForms:
         return f"{verb_stem}{ending}"
 
     @classmethod
-    def generate_conditional_form(cls, verb, verb_class, formality):
+    def generate_conditional_form(
+        cls, verb: str, verb_class: VerbClass, formality: Formality
+    ):
         """Generate the negative conditional form of the verb depending
         on the formality.
 
@@ -106,7 +108,9 @@ class NegativeVerbForms:
         return f"{verb}{RA_PARTICLE}"
 
     @classmethod
-    def generate_volitional_form(cls, verb, verb_class, formality):
+    def generate_volitional_form(
+        cls, verb: str, verb_class: VerbClass, formality: Formality
+    ):
         """Generate the negative volitional form of the verb depending
         on the formality.
 
@@ -128,7 +132,9 @@ class NegativeVerbForms:
             return f"{verb_nai_form}{VOLITIONAL_POLITE_COPULA}"
 
     @classmethod
-    def generate_potential_form(cls, verb, verb_class, formality):
+    def generate_potential_form(
+        cls, verb: str, verb_class: VerbClass, formality: Formality
+    ):
         """Generate the negative potential form of the verb depending
         on the formality.
 
@@ -153,7 +159,9 @@ class NegativeVerbForms:
             return f"{verb_stem}{MASU_NEGATIVE_NONPAST}"
 
     @classmethod
-    def generate_imperative_form(cls, verb, verb_class, formality):
+    def generate_imperative_form(
+        cls, verb: str, verb_class: VerbClass, formality: Formality
+    ):
         """Generate the negative imperative form of the verb depending
         on the formality.
 
@@ -174,7 +182,9 @@ class NegativeVerbForms:
             return f"{generate_nai_form(verb, verb_class, True)}{DE_PARTICLE}{KUDASAI}"
 
     @classmethod
-    def generate_provisional_form(cls, verb, verb_class, formality):
+    def generate_provisional_form(
+        cls, verb: str, verb_class: VerbClass, formality: Formality
+    ):
         """Generate the negative provisional form of the verb depending
         on the formality.
 
@@ -198,7 +208,9 @@ class NegativeVerbForms:
         return f"{verb_stem}{PROVISIONAL_ICHIDAN_PLAIN_NEGATIVE_ENDING}"
 
     @classmethod
-    def generate_causative_form(cls, verb, verb_class, formality):
+    def generate_causative_form(
+        cls, verb: str, verb_class: VerbClass, formality: Formality
+    ):
         """Generate the negative causative form of the verb depending
         on the formality.
 
@@ -223,7 +235,9 @@ class NegativeVerbForms:
             return f"{verb_stem}{MASU_NEGATIVE_NONPAST}"
 
     @classmethod
-    def generate_passive_form(cls, verb, verb_class, formality):
+    def generate_passive_form(
+        cls, verb: str, verb_class: VerbClass, formality: Formality
+    ):
         """Generate the negative passive form of the verb depending
         on the formality.
 
