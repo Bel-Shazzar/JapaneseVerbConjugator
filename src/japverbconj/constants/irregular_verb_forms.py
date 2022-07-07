@@ -312,23 +312,23 @@ KURU_CONJUGATION[BaseForm.PASSIVE][Formality.POLITE][Tense.NONPAST][
 def get_suru_conjugation(
     base_form: BaseForm, formality: Formality, tense: Tense, polarity: Polarity
 ):
-    try:
-        return SURU_CONJUGATION[base_form][formality][tense][polarity]
-    except KeyError:
+    conjugated_verb = SURU_CONJUGATION[base_form][formality][tense][polarity]
+    if conjugated_verb is None:
         raise NoConjugationError(
             f"Suru cannot be conjugated with ({base_form.name}, {formality.name}, {tense}, {polarity.name})"
         )
+    return conjugated_verb
 
 
 def get_kuru_conjugation(
     base_form: BaseForm, formality: Formality, tense: Tense, polarity: Polarity
 ):
-    try:
-        return KURU_CONJUGATION[base_form][formality][tense][polarity]
-    except KeyError:
+    conjugated_verb = KURU_CONJUGATION[base_form][formality][tense][polarity]
+    if conjugated_verb is None:
         raise NoConjugationError(
             f"Kuru cannot be conjugated with ({base_form.name}, {formality.name}, {tense}, {polarity.name})"
         )
+    return conjugated_verb
 
 
 def get_irregular_conjugation(

@@ -41,10 +41,6 @@ class IrregularVerb(Enum):
     KURU = "くる"
     KURU_KANJI = "来る"
 
-    @classmethod
-    def values(cls):
-        return [verb.value for verb in cls]
-
 
 if __name__ == "__main__":
     for element in IrregularVerb.values():
