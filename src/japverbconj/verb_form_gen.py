@@ -11,18 +11,27 @@ from .decorators import validate_japanese_verb
 from .exceptions import UnsupportedBaseFormError, UnsupportedCopulaFormError
 from .negative_form_gen import NegativeVerbForms
 from .positive_form_gen import PositiveVerbForms
-from .utils import convert_args, handle_irregular_verb
+from .utils import convert_args, convert_copula_args, handle_irregular_verb
 
 
 def generate_japanese_verb_by_str(
-    verb: str, verb_class: VerbClass, base_form_str: str, *args, **kwargs
+    verb: str, verb_class: VerbClass, base_form_str: str, *args
 ):
     for base_form in BaseForm:
         if base_form_str.lower() == base_form.value:
             return generate_japanese_verb_form(
-                verb, verb_class, base_form, **convert_args(base_form, *args, **kwargs)
+                verb, verb_class, base_form, **convert_args(base_form, *args)
             )
     raise UnsupportedBaseFormError(f"Unsupported BaseForm string {base_form_str}")
+
+
+def generate_japanese_copula_by_str(copula_form_str: str, *args):
+    for copula_form in CopulaForm:
+        if copula_form_str.lower() == copula_form.value:
+            return generate_japanese_copula_form(
+                copula_form, **convert_copula_args(copula_form, *args)
+            )
+    raise UnsupportedCopulaFormError(f"Unsupported CopulaForm string {copula_form_str}")
 
 
 def generate_japanese_verb_form(
