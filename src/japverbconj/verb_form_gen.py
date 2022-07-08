@@ -1,8 +1,9 @@
-from .constants.enumerated_types import Polarity
+from .constants.enumerated_types import BaseForm, Formality, Polarity, VerbClass
 from .copula_gen import Copula
 from .decorators import validate_japanese_verb
 from .negative_form_gen import NegativeVerbForms
 from .positive_form_gen import PositiveVerbForms
+from .utils import handle_irregular_verb
 
 
 class JapaneseVerbFormGenerator:
@@ -28,6 +29,14 @@ class JapaneseVerbFormGenerator:
             str: plain form of the verb based on the tense and polarity
         parameters
         """
+        if verb_class == VerbClass.IRREGULAR:
+            return handle_irregular_verb(
+                verb,
+                BaseForm.PLAIN,
+                formality=Formality.PLAIN,
+                tense=tense,
+                polarity=polarity,
+            )
         if polarity == Polarity.POSITIVE:
             return cls.positive_verb_forms.generate_plain_form(verb, verb_class, tense)
         return cls.negative_verb_forms.generate_plain_form(verb, verb_class, tense)
@@ -50,6 +59,14 @@ class JapaneseVerbFormGenerator:
             str: polite form of the verb based on the tense and polarity
         parameters
         """
+        if verb_class == VerbClass.IRREGULAR:
+            return handle_irregular_verb(
+                verb,
+                BaseForm.POLITE,
+                formality=Formality.POLITE,
+                tense=tense,
+                polarity=polarity,
+            )
         if polarity == Polarity.POSITIVE:
             return cls.positive_verb_forms.generate_polite_form(verb, verb_class, tense)
         return cls.negative_verb_forms.generate_polite_form(verb, verb_class, tense)
@@ -68,13 +85,19 @@ class JapaneseVerbFormGenerator:
         Returns:
             str: -te form of the verb
         """
+        if verb_class == VerbClass.IRREGULAR:
+            return handle_irregular_verb(
+                verb, BaseForm.TE, formality=formality, polarity=polarity
+            )
         if polarity == Polarity.POSITIVE:
             return cls.positive_verb_forms.generate_te_form(verb, verb_class, formality)
         return cls.negative_verb_forms.generate_te_form(verb, verb_class, formality)
 
     @classmethod
     @validate_japanese_verb
-    def generate_conditional_form(cls, verb, verb_class, formality, polarity):
+    def generate_conditional_form(
+        cls, verb, verb_class: VerbClass, formality: Formality, polarity: Polarity
+    ):
         """Generate the conditional form of the verb depending on the formality.
 
         Args:
@@ -90,6 +113,10 @@ class JapaneseVerbFormGenerator:
             str: conditional form of the verb based on the formality and polarity
         parameters
         """
+        if verb_class == VerbClass.IRREGULAR:
+            return handle_irregular_verb(
+                verb, BaseForm.CONDITIONAL, formality=formality, polarity=polarity
+            )
         if polarity == Polarity.POSITIVE:
             return cls.positive_verb_forms.generate_conditional_form(
                 verb, verb_class, formality
@@ -116,6 +143,10 @@ class JapaneseVerbFormGenerator:
             str: volitional form of the verb based on the formality and polarity
         parameters
         """
+        if verb_class == VerbClass.IRREGULAR:
+            return handle_irregular_verb(
+                verb, BaseForm.VOLITIONAL, formality=formality, polarity=polarity
+            )
         if polarity == Polarity.POSITIVE:
             return cls.positive_verb_forms.generate_volitional_form(
                 verb, verb_class, formality
@@ -142,6 +173,10 @@ class JapaneseVerbFormGenerator:
             str: potential form of the verb based on the formality and polarity
         parameters
         """
+        if verb_class == VerbClass.IRREGULAR:
+            return handle_irregular_verb(
+                verb, BaseForm.POTENTIAL, formality=formality, polarity=polarity
+            )
         if polarity == Polarity.POSITIVE:
             return cls.positive_verb_forms.generate_potential_form(
                 verb, verb_class, formality
@@ -168,6 +203,10 @@ class JapaneseVerbFormGenerator:
             str: imperative form of the verb based on the formality and polarity
         parameters
         """
+        if verb_class == VerbClass.IRREGULAR:
+            return handle_irregular_verb(
+                verb, BaseForm.IMPERATIVE, formality=formality, polarity=polarity
+            )
         if polarity == Polarity.POSITIVE:
             return cls.positive_verb_forms.generate_imperative_form(
                 verb, verb_class, formality
@@ -194,10 +233,12 @@ class JapaneseVerbFormGenerator:
             str: provisional form of the verb based on the formality and polarity
         parameters
         """
-        if polarity == Polarity.POSITIVE:
-            return cls.positive_verb_forms.generate_provisional_form(
-                verb, verb_class, formality
+        if verb_class == VerbClass.IRREGULAR:
+            return handle_irregular_verb(
+                verb, BaseForm.PROVISIONAL, formality=formality, polarity=polarity
             )
+        if polarity == Polarity.POSITIVE:
+            return cls.positive_verb_forms.generate_provisional_form(verb, verb_class)
         return cls.negative_verb_forms.generate_provisional_form(
             verb, verb_class, formality
         )
@@ -220,6 +261,10 @@ class JapaneseVerbFormGenerator:
             str: causative form of the verb based on the formality and polarity
         parameters
         """
+        if verb_class == VerbClass.IRREGULAR:
+            return handle_irregular_verb(
+                verb, BaseForm.CAUSATIVE, formality=formality, polarity=polarity
+            )
         if polarity == Polarity.POSITIVE:
             return cls.positive_verb_forms.generate_causative_form(
                 verb, verb_class, formality
@@ -246,6 +291,10 @@ class JapaneseVerbFormGenerator:
             str: passive form of the verb based on the formality and polarity
         parameters
         """
+        if verb_class == VerbClass.IRREGULAR:
+            return handle_irregular_verb(
+                verb, BaseForm.PASSIVE, formality=formality, polarity=polarity
+            )
         if polarity == Polarity.POSITIVE:
             return cls.positive_verb_forms.generate_passive_form(
                 verb, verb_class, formality
