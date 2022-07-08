@@ -32,7 +32,7 @@ class CopulaGenerator:
                 return PAST_DA_PLAIN_NEGATIVE_ENDING
 
     @classmethod
-    def generate_polite_form(cls, tense, polarity):
+    def generate_polite_form(cls, tense: Tense, polarity: Polarity):
         if polarity == Polarity.POSITIVE:
             if tense == Tense.NONPAST:
                 return POLITE_DA_POSITIVE_ENDING
