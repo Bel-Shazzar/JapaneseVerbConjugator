@@ -17,6 +17,7 @@ from src.japverbconj.exceptions import (
 from src.japverbconj.verb_form_gen import (
     JapaneseVerbFormGenerator as jvfg,
     generate_japanese_copula_form,
+    generate_japanese_verb_by_str,
 )
 from src.japverbconj.verb_form_gen import generate_japanese_verb_form
 
@@ -30,8 +31,11 @@ class TestAllVerbForms(unittest.TestCase):
             [base_form.name.lower(), *[arg.name.lower() for arg in args]]
         )
         try:
-            result = generate_japanese_verb_form(
-                verb.plain_nonpast_positive, verb.verb_class, base_form, *args
+            result = generate_japanese_verb_by_str(
+                verb.plain_nonpast_positive,
+                verb.verb_class,
+                base_form.value,
+                *[arg.value for arg in args],
             )
         except NoConjugationError:
             if hasattr(verb, attribute_name):
@@ -50,6 +54,10 @@ class TestAllVerbForms(unittest.TestCase):
     def test_unsupported_base_form_error(self):
         with self.assertRaises(UnsupportedBaseFormError):
             generate_japanese_verb_form("", None, -1)
+
+    def test_unsupported_base_form_str_error(self):
+        with self.assertRaises(UnsupportedBaseFormError):
+            generate_japanese_verb_by_str("", None, "no")
 
 
 class TestCopula(unittest.TestCase):

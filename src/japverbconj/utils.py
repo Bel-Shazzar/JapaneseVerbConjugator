@@ -213,3 +213,21 @@ def map_dict_form_to_different_ending(verb, desired_ending):
     verb_stem, particle_ending = splice_verb(verb, VerbClass.GODAN)
 
     return f"{verb_stem}{ENDING_DICT[particle_ending][desired_ending]}"
+
+
+def convert_args(base_form: BaseForm, *args, **kwargs):
+    return_kwargs = {
+        "formality": Formality.PLAIN,
+        "tense": Tense.NONPAST,
+        "polarity": Polarity.POSITIVE,
+    }
+    for arg in args:
+        for arg_type in ArgumentType:
+            if arg in [arg_t.value for arg_t in arg_type.value]:
+                return_kwargs[arg_type.value.__name__.lower()] = arg_type.value(arg)
+                continue
+    if base_form in [BaseForm.PLAIN, BaseForm.POLITE]:
+        del return_kwargs[ArgumentType.FORMALITY.value.__name__.lower()]
+    else:
+        del return_kwargs[ArgumentType.TENSE.value.__name__.lower()]
+    return return_kwargs

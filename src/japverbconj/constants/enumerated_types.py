@@ -2,16 +2,16 @@ from enum import Enum, auto
 
 
 class BaseForm(Enum):
-    PLAIN = auto()
-    POLITE = auto()
-    TE = auto()
-    CONDITIONAL = auto()
-    VOLITIONAL = auto()
-    POTENTIAL = auto()
-    IMPERATIVE = auto()
-    PROVISIONAL = auto()
-    CAUSATIVE = auto()
-    PASSIVE = auto()
+    PLAIN = "pla"
+    POLITE = "pol"
+    TE = "te"
+    CONDITIONAL = "cond"
+    VOLITIONAL = "vol"
+    POTENTIAL = "pot"
+    IMPERATIVE = "imp"
+    PROVISIONAL = "prov"
+    CAUSATIVE = "caus"
+    PASSIVE = "pass"
 
 
 class CopulaForm(Enum):
@@ -19,8 +19,8 @@ class CopulaForm(Enum):
     POLITE = BaseForm.POLITE.value
     TE = BaseForm.TE.value
     CONDITIONAL = BaseForm.CONDITIONAL.value
-    TARA = auto()
-    PRESUMPTIVE = auto()
+    TARA = "tara"
+    PRESUMPTIVE = "pres"
 
 
 class Formality(Enum):
@@ -29,13 +29,13 @@ class Formality(Enum):
 
 
 class Polarity(Enum):
-    POSITIVE = auto()
-    NEGATIVE = auto()
+    POSITIVE = "pos"
+    NEGATIVE = "neg"
 
 
 class Tense(Enum):
-    PAST = auto()
-    NONPAST = auto()
+    NONPAST = "nonpast"
+    PAST = "past"
 
 
 class VerbClass(Enum):
@@ -48,6 +48,12 @@ class IrregularVerb(Enum):
     SURU = "する"
     KURU = "くる"
     KURU_KANJI = "来る"
+
+
+class ArgumentType(Enum):
+    FORMALITY = Formality
+    TENSE = Tense
+    POLARITY = Polarity
 
 
 if __name__ == "__main__":
