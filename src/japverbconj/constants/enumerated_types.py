@@ -14,6 +14,15 @@ class BaseForm(Enum):
     PASSIVE = auto()
 
 
+class CopulaForm(Enum):
+    PLAIN = BaseForm.PLAIN.value
+    POLITE = BaseForm.POLITE.value
+    TE = BaseForm.TE.value
+    CONDITIONAL = BaseForm.CONDITIONAL.value
+    TARA = auto()
+    PRESUMPTIVE = auto()
+
+
 class Formality(Enum):
     PLAIN = BaseForm.PLAIN.value
     POLITE = BaseForm.POLITE.value
@@ -33,7 +42,6 @@ class VerbClass(Enum):
     GODAN = auto()
     ICHIDAN = auto()
     IRREGULAR = auto()
-    NONIRREGULAR = auto()
 
 
 class IrregularVerb(Enum):
@@ -43,5 +51,5 @@ class IrregularVerb(Enum):
 
 
 if __name__ == "__main__":
-    for element in IrregularVerb.values():
-        print(element)
+    for element in CopulaForm:
+        print(element.name, element.value)

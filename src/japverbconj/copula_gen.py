@@ -1,3 +1,4 @@
+from tkinter.tix import Form
 from .constants.enumerated_types import Formality, Polarity, Tense
 from .constants.particle_constants import RA_PARTICLE
 from .constants.verb_ending_constants import (
@@ -16,9 +17,9 @@ from .constants.verb_ending_constants import (
 )
 
 
-class Copula:
+class CopulaGenerator:
     @classmethod
-    def generate_plain_form(cls, tense, polarity):
+    def generate_plain_form(cls, tense: Tense, polarity: Polarity):
         if polarity == Polarity.POSITIVE:
             if tense == Tense.NONPAST:
                 return PLAIN_DA_POSITIVE_ENDING
@@ -48,26 +49,27 @@ class Copula:
         return CONDITIONAL_DA_PLAIN_POSITIVE_ENDING
 
     @classmethod
-    def generate_presumptive_form(cls, formality, polarity):
-        if polarity == Polarity.POSITIVE:
-            stem = ""
-        else:
-            stem = PLAIN_DA_NEGATIVE_ENDING
+    def generate_presumptive_form(cls, formality: Formality, polarity: Polarity):
+        stem = ""
         if formality == Formality.PLAIN:
+            if polarity == Polarity.NEGATIVE:
+                stem = PLAIN_DA_NEGATIVE_ENDING
             ending = PRESUMPTIVE_DA_PLAIN_POSITIVE_ENDING
         else:
+            if polarity == Polarity.NEGATIVE:
+                stem = POLITE_DA_NEGATIVE_ENDING
             ending = PRESUMPTIVE_DA_POLITE_POSITIVE_ENDING
         return f"{stem}{ending}"
 
     @classmethod
-    def generate_te_form(cls, formality):
+    def generate_te_form(cls, formality: Formality):
         if formality == Formality.PLAIN:
             return TE_FORM_DA_PLAIN_POSITIVE_ENDING
         else:
             return TE_FORM_DA_POLITE_POSITIVE_ENDING
 
     @classmethod
-    def generate_tara_form(cls, formality):
+    def generate_tara_form(cls, formality: Formality):
         if formality == Formality.PLAIN:
             return (
                 f"{cls.generate_plain_form(Tense.PAST,Polarity.POSITIVE)}{RA_PARTICLE}"

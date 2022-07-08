@@ -1,438 +1,166 @@
 import unittest
+from xmlrpc.client import UNSUPPORTED_ENCODING
 
 from parameterized import parameterized
 from src.japverbconj.constants.enumerated_types import (
+    BaseForm,
+    CopulaForm,
     Formality,
     Polarity,
     Tense,
-    VerbClass,
 )
 from src.japverbconj.constants.irregular_verb_forms import NoConjugationError
-from src.japverbconj.verb_form_gen import JapaneseVerbFormGenerator as jvfg
-from src.japverbconj.verb_form_gen import *
+from src.japverbconj.exceptions import (
+    UnsupportedBaseFormError,
+    UnsupportedCopulaFormError,
+)
+from src.japverbconj.verb_form_gen import (
+    JapaneseVerbFormGenerator as jvfg,
+    generate_japanese_copula_form,
+)
+from src.japverbconj.verb_form_gen import generate_japanese_verb_form
 
-from .constants import PARAMETER_LIST, CopulaDa
+from tests.constants import COPULA_FORM_PARAMETERS, VERB_FORM_PARAMETERS, CopulaDa
 
 
-# ---------------------------------------------------------- #
-#                    Positive Verb Form Tests                #
-# ---------------------------------------------------------- #
-class TestPositiveVerbForms(unittest.TestCase):
-    """Tests for each positive verb conjugation form considering
-    the permutations of tense and formality. Skipped Tests for
-    Irregular Positive Verbs include:
-
-    - CausativePolitePositive
-    - ConditionalPlain
-    - ConditionalPolite
-    - PassivePolitePositive
-    - VolitionalPolitePositive
-
-    This structure of class based test cases and inheriting from
-    ParametrizedTestCase allows testing of different verbs across
-    different verb classes. To test a different verb, simply update
-    the self.param arg passed to ParametrizedTestCase.
-    """
-
-    def setUp(self):
-        self.polarity = Polarity.POSITIVE
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_polite_positive_nonpast(self, _, verb):
-        result = jvfg.generate_polite_form(
-            verb.verb, verb.verb_class, Tense.NONPAST, self.polarity
+class TestAllVerbForms(unittest.TestCase):
+    @parameterized.expand(VERB_FORM_PARAMETERS)
+    def test(self, _, verb, base_form: BaseForm, *args):
+        attribute_name = "_".join(
+            [base_form.name.lower(), *[arg.name.lower() for arg in args]]
         )
-        self.assertEqual(result, verb.polite_positive_nonpast)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_polite_positive_past(self, _, verb):
-        result = jvfg.generate_polite_form(
-            verb.verb, verb.verb_class, Tense.PAST, self.polarity
-        )
-        self.assertEqual(result, verb.polite_positive_past)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_plain_positive_nonpast(self, _, verb):
-        result = jvfg.generate_plain_form(
-            verb.verb, verb.verb_class, Tense.NONPAST, self.polarity
-        )
-        self.assertEqual(result, verb.verb)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_plain_positive_past(self, _, verb):
-        result = jvfg.generate_plain_form(
-            verb.verb, verb.verb_class, Tense.PAST, self.polarity
-        )
-        self.assertEqual(result, verb.plain_positive_past)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_te_form_plain_positive(self, _, verb):
-        result = jvfg.generate_te_form(
-            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
-        )
-        self.assertEqual(result, verb.te_form_plain_positive)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_te_form_polite_positive(self, _, verb):
-        result = jvfg.generate_te_form(
-            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
-        )
-        self.assertEqual(result, verb.te_form_polite_positive)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_conditional_plain_positive(self, _, verb):
-        if verb.verb_class == VerbClass.IRREGULAR:
-            self.skipTest("Not Required for Irregular Verbs")
-        result = jvfg.generate_conditional_form(
-            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
-        )
-        self.assertEqual(result, verb.conditional_plain_positive)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_conditional_polite_positive(self, _, verb):
-        if verb.verb_class == VerbClass.IRREGULAR:
-            self.skipTest("Not Required for Irregular Verbs")
-        result = jvfg.generate_conditional_form(
-            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
-        )
-        self.assertEqual(result, verb.conditional_polite_positive)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_volitional_plain_positive(self, _, verb):
-        result = jvfg.generate_volitional_form(
-            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
-        )
-        self.assertEqual(result, verb.volitional_plain_positive)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_volitional_polite_positive(self, _, verb):
-        result = jvfg.generate_volitional_form(
-            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
-        )
-        self.assertEqual(result, verb.volitional_polite_positive)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_potential_plain_positive(self, _, verb):
-        result = jvfg.generate_potential_form(
-            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
-        )
-        self.assertEqual(result, verb.potential_plain_positive)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_potential_polite_positive(self, _, verb):
-        result = jvfg.generate_potential_form(
-            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
-        )
-        self.assertEqual(result, verb.potential_polite_positive)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_imperative_plain_positive(self, _, verb):
-        result = jvfg.generate_imperative_form(
-            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
-        )
-        self.assertEqual(result, verb.imperative_plain_positive)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_imperative_polite_positive(self, _, verb):
-        result = jvfg.generate_imperative_form(
-            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
-        )
-        self.assertEqual(result, verb.imperative_polite_positive)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_provisional_plain_positive(self, _, verb):
-        result = jvfg.generate_provisional_form(
-            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
-        )
-        self.assertEqual(result, verb.provisional_plain_positive)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_provisional_polite_positive(self, _, verb):
-        if verb.verb_class is not VerbClass.IRREGULAR:
-            self.skipTest("Not Required for Non-Irregular Verbs")
-        result = jvfg.generate_provisional_form(
-            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
-        )
-        self.assertEqual(result, verb.provisional_polite_positive)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_causative_plain_positive(self, _, verb):
-        result = jvfg.generate_causative_form(
-            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
-        )
-        self.assertEqual(result, verb.causative_plain_positive)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_causative_polite_positive(self, _, verb):
-        result = jvfg.generate_causative_form(
-            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
-        )
-        self.assertEqual(result, verb.causative_polite_positive)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_passive_plain_positive(self, _, verb):
-        result = jvfg.generate_passive_form(
-            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
-        )
-        self.assertEqual(result, verb.passive_plain_positive)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_passive_polite_positive(self, _, verb):
-        result = jvfg.generate_passive_form(
-            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
-        )
-        self.assertEqual(result, verb.passive_polite_positive)
-
-
-# ---------------------------------------------------------- #
-#                    Negative Verb Form Tests                #
-# ---------------------------------------------------------- #
-class TestNegativeVerbForms(unittest.TestCase):
-    """Tests for each negative verb conjugation form considering
-    the permutations of tense and formality. Skipped Tests for
-    Irregular Negative Verbs include:
-
-    - CausativePlainNegative for する verbs
-    - CausativePoliteNegative for する verbs
-    - PassivePlainNegative
-    - PassivePoliteNegative
-    - ProvisionalPoliteNegative
-
-    This structure of class based test cases and inheriting from
-    ParametrizedTestCase allows testing of different verbs across
-    different verb classes. To test a different verb, simply update
-    the self.param arg passed to ParametrizedTestCase.
-    """
-
-    def setUp(self):
-        self.polarity = Polarity.NEGATIVE
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_polite_negative_nonpast(self, _, verb):
-        result = jvfg.generate_polite_form(
-            verb.verb, verb.verb_class, Tense.NONPAST, self.polarity
-        )
-        self.assertEqual(result, verb.polite_negative_nonpast)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_polite_negative_past(self, _, verb):
-        result = jvfg.generate_polite_form(
-            verb.verb, verb.verb_class, Tense.PAST, self.polarity
-        )
-        self.assertEqual(result, verb.polite_negative_past)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_plain_negative_nonpast(self, _, verb):
-        result = jvfg.generate_plain_form(
-            verb.verb, verb.verb_class, Tense.NONPAST, self.polarity
-        )
-        self.assertEqual(result, verb.plain_negative_nonpast)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_plain_negative_past(self, _, verb):
-        result = jvfg.generate_plain_form(
-            verb.verb, verb.verb_class, Tense.PAST, self.polarity
-        )
-        self.assertEqual(result, verb.plain_negative_past)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_te_form_plain_negative(self, _, verb):
-        result = jvfg.generate_te_form(
-            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
-        )
-        self.assertEqual(result, verb.te_form_plain_negative)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_conditional_plain_negative(self, _, verb):
-        result = jvfg.generate_conditional_form(
-            verb.verb,
-            verb.verb_class,
-            formality=Formality.PLAIN,
-            polarity=self.polarity,
-        )
-        self.assertEqual(result, verb.conditional_plain_negative)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_conditional_polite_negative(self, _, verb):
-        result = jvfg.generate_conditional_form(
-            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
-        )
-        self.assertEqual(result, verb.conditional_polite_negative)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_volitional_plain_negative(self, _, verb):
-        result = jvfg.generate_volitional_form(
-            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
-        )
-        self.assertEqual(result, verb.volitional_plain_negative)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_volitional_polite_negative(self, _, verb):
-        result = jvfg.generate_volitional_form(
-            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
-        )
-        self.assertEqual(result, verb.volitional_polite_negative)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_potential_plain_negative(self, _, verb):
-        result = jvfg.generate_potential_form(
-            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
-        )
-        self.assertEqual(result, verb.potential_plain_negative)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_potential_polite_negative(self, _, verb):
-        result = jvfg.generate_potential_form(
-            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
-        )
-        self.assertEqual(result, verb.potential_polite_negative)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_imperative_plain_negative(self, _, verb):
-        result = jvfg.generate_imperative_form(
-            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
-        )
-        self.assertEqual(result, verb.imperative_plain_negative)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_imperative_polite_negative(self, _, verb):
-        result = jvfg.generate_imperative_form(
-            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
-        )
-        self.assertEqual(result, verb.imperative_polite_negative)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_provisional_plain_negative(self, _, verb):
-        result = jvfg.generate_provisional_form(
-            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
-        )
-        self.assertEqual(result, verb.provisional_plain_negative)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_provisional_polite_negative(self, _, verb):
-        if verb.verb_class is not VerbClass.IRREGULAR:
-            self.skipTest("Not required for non-irregular verbs")
-        result = jvfg.generate_provisional_form(
-            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
-        )
-        self.assertEqual(result, verb.provisional_polite_negative)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_causative_plain_negative(self, _, verb):
-        result = jvfg.generate_causative_form(
-            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
-        )
-        self.assertEqual(result, verb.causative_plain_negative)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_causative_polite_negative(self, _, verb):
-        result = jvfg.generate_causative_form(
-            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
-        )
-        self.assertEqual(result, verb.causative_polite_negative)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_passive_plain_negative(self, _, verb):
-        result = jvfg.generate_passive_form(
-            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
-        )
-        self.assertEqual(result, verb.passive_plain_negative)
-
-    @parameterized.expand(PARAMETER_LIST)
-    def test_passive_polite_negative(self, _, verb):
-        result = jvfg.generate_passive_form(
-            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
-        )
-        self.assertEqual(result, verb.passive_polite_negative)
-
-    @parameterized.expand(
-        [tup for tup in PARAMETER_LIST if tup[1].verb_class == VerbClass.IRREGULAR]
-    )
-    def test_irregular_errors(self, _, verb):
-        with self.assertRaises(NoConjugationError, msg=verb.verb):
-            jvfg.generate_te_form(
-                verb=verb.verb,
-                verb_class=verb.verb_class,
-                formality=Formality.POLITE,
-                polarity=Polarity.NEGATIVE,
+        try:
+            result = generate_japanese_verb_form(
+                verb.plain_nonpast_positive, verb.verb_class, base_form, *args
             )
+        except NoConjugationError:
+            if hasattr(verb, attribute_name):
+                self.fail(
+                    f"verb {verb.romaji} has attribute {attribute_name} -> {getattr(verb, attribute_name)}"
+                )
+            else:
+                self.skipTest(f"verb {verb.romaji} has not attribute {attribute_name}")
+        else:
+            self.assertTrue(
+                hasattr(verb, attribute_name),
+                f"verb {verb} should have attribute {attribute_name} -> {result}",
+            )
+            self.assertEqual(result, getattr(verb, attribute_name))
+
+    def test_unsupported_base_form_error(self):
+        with self.assertRaises(UnsupportedBaseFormError):
+            generate_japanese_verb_form("", None, -1)
 
 
 class TestCopula(unittest.TestCase):
-    @parameterized.expand(
-        [
-            ("pos", Tense.NONPAST, Polarity.POSITIVE, CopulaDa.plain_positive),
-            ("pos past", Tense.PAST, Polarity.POSITIVE, CopulaDa.plain_past),
-            ("neg", Tense.NONPAST, Polarity.NEGATIVE, CopulaDa.plain_negative),
-            ("neg past", Tense.PAST, Polarity.NEGATIVE, CopulaDa.plain_past_negative),
-        ]
-    )
-    def test_copula_plain(self, _, tense, polarity, expected_copula):
-        self.assertEqual(
-            jvfg.copula.generate_plain_form(tense, polarity), expected_copula
+    @parameterized.expand(COPULA_FORM_PARAMETERS)
+    def test(self, _, copula_form: CopulaForm, *args):
+        attribute_name = "_".join(
+            [copula_form.name.lower(), *[arg.name.lower() for arg in args]]
         )
+        try:
+            result = generate_japanese_copula_form(copula_form, *args)
+        except NoConjugationError:
+            if hasattr(CopulaDa, attribute_name):
+                self.fail(
+                    f"da has attribute {attribute_name} -> {getattr(CopulaDa, attribute_name)}"
+                )
+            else:
+                self.skipTest(f"da has not attribute {attribute_name}")
+        else:
+            self.assertTrue(
+                hasattr(CopulaDa, attribute_name),
+                f"da should have attribute {attribute_name} -> {result}",
+            )
+            self.assertEqual(result, getattr(CopulaDa, attribute_name))
 
-    @parameterized.expand(
-        [
-            ("pos", Tense.NONPAST, Polarity.POSITIVE, CopulaDa.polite_positive),
-            ("pos past", Tense.PAST, Polarity.POSITIVE, CopulaDa.polite_past),
-            ("neg", Tense.NONPAST, Polarity.NEGATIVE, CopulaDa.polite_negative),
-            ("neg past", Tense.PAST, Polarity.NEGATIVE, CopulaDa.polite_past_negative),
-        ]
-    )
-    def test_copula_polite(self, _, tense, polarity, expected_copula):
-        self.assertEqual(
-            jvfg.copula.generate_polite_form(tense, polarity), expected_copula
-        )
+    # @parameterized.expand(
+    #     [
+    #         ("pos", Tense.NONPAST, Polarity.POSITIVE, CopulaDa.plain_positive),
+    #         ("pos past", Tense.PAST, Polarity.POSITIVE, CopulaDa.plain_past),
+    #         ("neg", Tense.NONPAST, Polarity.NEGATIVE, CopulaDa.plain_negative),
+    #         ("neg past", Tense.PAST, Polarity.NEGATIVE, CopulaDa.plain_past_negative),
+    #     ]
+    # )
+    # def test_copula_plain(self, _, tense, polarity, expected_copula):
+    #     self.assertEqual(
+    #         generate_japanese_copula_form(CopulaForm.PLAIN, tense, polarity),
+    #         expected_copula,
+    #     )
 
-    def test_copula_conditional(self):
-        self.assertEqual(jvfg.copula.generate_conditional_form(), CopulaDa.conditional)
+    # @parameterized.expand(
+    #     [
+    #         ("pos", Tense.NONPAST, Polarity.POSITIVE, CopulaDa.polite_positive),
+    #         ("pos past", Tense.PAST, Polarity.POSITIVE, CopulaDa.polite_past),
+    #         ("neg", Tense.NONPAST, Polarity.NEGATIVE, CopulaDa.polite_negative),
+    #         ("neg past", Tense.PAST, Polarity.NEGATIVE, CopulaDa.polite_past_negative),
+    #     ]
+    # )
+    # def test_copula_polite(self, _, tense, polarity, expected_copula):
+    #     self.assertEqual(
+    #         generate_japanese_copula_form(CopulaForm.POLITE, tense, polarity),
+    #         expected_copula,
+    #     )
 
-    @parameterized.expand(
-        [
-            ("pla pos", Formality.PLAIN, Polarity.POSITIVE, CopulaDa.presumptive_plain),
-            (
-                "pol pos",
-                Formality.POLITE,
-                Polarity.POSITIVE,
-                CopulaDa.presumptive_polite,
-            ),
-            (
-                "pla neg",
-                Formality.PLAIN,
-                Polarity.NEGATIVE,
-                CopulaDa.presumptive_plain_negative,
-            ),
-            (
-                "pol neg",
-                Formality.POLITE,
-                Polarity.NEGATIVE,
-                CopulaDa.presumptive_polite_negative,
-            ),
-        ]
-    )
-    def test_copula_presumptive(self, _, formality, polarity, expected_copula):
-        self.assertEqual(
-            jvfg.copula.generate_presumptive_form(formality, polarity), expected_copula
-        )
+    # def test_copula_conditional(self):
+    #     self.assertEqual(
+    #         generate_japanese_copula_form(CopulaForm.CONDITIONAL), CopulaDa.conditional
+    #     )
 
-    @parameterized.expand(
-        [
-            ("pla", Formality.PLAIN, CopulaDa.te_form_plain),
-            ("pol", Formality.POLITE, CopulaDa.te_form_polite),
-        ]
-    )
-    def test_copula_te_form(self, _, formality, expected_copula):
-        self.assertEqual(jvfg.copula.generate_te_form(formality), expected_copula)
+    # @parameterized.expand(
+    #     [
+    #         ("pla pos", Formality.PLAIN, Polarity.POSITIVE, CopulaDa.presumptive_plain),
+    #         (
+    #             "pol pos",
+    #             Formality.POLITE,
+    #             Polarity.POSITIVE,
+    #             CopulaDa.presumptive_polite,
+    #         ),
+    #         (
+    #             "pla neg",
+    #             Formality.PLAIN,
+    #             Polarity.NEGATIVE,
+    #             CopulaDa.presumptive_plain_negative,
+    #         ),
+    #         (
+    #             "pol neg",
+    #             Formality.POLITE,
+    #             Polarity.NEGATIVE,
+    #             CopulaDa.presumptive_polite_negative,
+    #         ),
+    #     ]
+    # )
+    # def test_copula_presumptive(self, _, formality, polarity, expected_copula):
+    #     self.assertEqual(
+    #         generate_japanese_copula_form(CopulaForm.PRESUMPTIVE, formality, polarity),
+    #         expected_copula,
+    #     )
 
-    @parameterized.expand(
-        [
-            ("pla", Formality.PLAIN, CopulaDa.tara_plain),
-            ("pol", Formality.POLITE, CopulaDa.tara_polite),
-        ]
-    )
-    def test_copula_tara_form(self, _, formality, expected_copula):
-        self.assertEqual(jvfg.copula.generate_tara_form(formality), expected_copula)
+    # @parameterized.expand(
+    #     [
+    #         ("pla", Formality.PLAIN, CopulaDa.te_plain),
+    #         ("pol", Formality.POLITE, CopulaDa.te_polite),
+    #     ]
+    # )
+    # def test_copula_te_form(self, _, formality, expected_copula):
+    #     self.assertEqual(
+    #         generate_japanese_copula_form(CopulaForm.TE, formality), expected_copula
+    #     )
+
+    # @parameterized.expand(
+    #     [
+    #         ("pla", Formality.PLAIN, CopulaDa.tara_plain),
+    #         ("pol", Formality.POLITE, CopulaDa.tara_polite),
+    #     ]
+    # )
+    # def test_copula_tara_form(self, _, formality, expected_copula):
+    #     self.assertEqual(
+    #         generate_japanese_copula_form(CopulaForm.TARA, formality), expected_copula
+    #     )
+
+    def test_unsupported_copula_form(self):
+        with self.assertRaises(UnsupportedCopulaFormError):
+            generate_japanese_copula_form(-1)
 
 
 if __name__ == "__main__":

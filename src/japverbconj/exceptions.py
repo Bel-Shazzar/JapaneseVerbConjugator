@@ -12,3 +12,11 @@ class NonJapaneseCharacterError(Exception):
 
 class NonIrregularVerbError(Exception):
     pass
+
+
+class UnsupportedBaseFormError(Exception):
+    pass
+
+
+class UnsupportedCopulaFormError(Exception):
+    pass

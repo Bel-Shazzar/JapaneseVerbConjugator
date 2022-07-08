@@ -64,12 +64,12 @@ class UtilsTests(unittest.TestCase):
 
     def test_validate_japanese_verb_valid_verb(self):
         result = jvfg.generate_plain_form(
-            GodanVerbNomu.verb,
+            GodanVerbNomu.plain_nonpast_positive,
             GodanVerbNomu.verb_class,
             Tense.NONPAST,
             Polarity.POSITIVE,
         )
-        self.assertEqual(result, GodanVerbNomu.verb)
+        self.assertEqual(result, GodanVerbNomu.plain_nonpast_positive)
 
 
 if __name__ == "__main__":
