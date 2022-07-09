@@ -1,4 +1,7 @@
-## 2022-07-09 (v0.3.0)
+## 2022-07-09 (v0.3.1)
+- fix import error
+
+## 2022-07-09 (v0.3.0) - yanked
 - add new method to generate by strings instead of Enums
 
 ## 2022-07-03 (v0.2.1)

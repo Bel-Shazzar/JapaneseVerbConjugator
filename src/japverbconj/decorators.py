@@ -1,4 +1,4 @@
-from .exceptions import (
+from .constants.exceptions import (
     InvalidJapaneseVerbEndingError,
     InvalidJapaneseVerbLengthError,
     NonJapaneseCharacterError,

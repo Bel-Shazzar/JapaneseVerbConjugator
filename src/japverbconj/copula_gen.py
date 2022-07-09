@@ -1,4 +1,3 @@
-from tkinter.tix import Form
 from .constants.enumerated_types import Formality, Polarity, Tense
 from .constants.particle_constants import RA_PARTICLE
 from .constants.verb_ending_constants import (

@@ -3,7 +3,7 @@ import unittest
 from parameterized import parameterized
 from src.japverbconj.constants.enumerated_types import BaseForm, CopulaForm
 from src.japverbconj.constants.irregular_verb_forms import NoConjugationError
-from src.japverbconj.exceptions import (
+from src.japverbconj.constants.exceptions import (
     UnsupportedBaseFormError,
     UnsupportedCopulaFormError,
 )

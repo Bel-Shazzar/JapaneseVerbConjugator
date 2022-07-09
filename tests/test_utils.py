@@ -1,5 +1,6 @@
 import unittest
 
+from src.japverbconj.constants.exceptions import NonIrregularVerbError
 from src.japverbconj.constants.particle_constants import DA_PARTICLE, TA_PARTICLE
 from src.japverbconj.utils import *
 

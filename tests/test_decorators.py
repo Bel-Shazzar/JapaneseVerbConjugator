@@ -13,7 +13,7 @@ from .constants import (
 )
 
 
-class UtilsTests(unittest.TestCase):
+class DecoratorTests(unittest.TestCase):
     def setUp(self):
         self.verb_class = VerbClass.GODAN
 
