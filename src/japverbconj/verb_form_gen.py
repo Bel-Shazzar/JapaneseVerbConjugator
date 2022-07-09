@@ -1,15 +1,111 @@
-from .constants.enumerated_types import BaseForm, Formality, Polarity, VerbClass
-from .copula_gen import Copula
+from .constants.enumerated_types import (
+    BaseForm,
+    CopulaForm,
+    Formality,
+    Polarity,
+    VerbClass,
+)
+from .constants.irregular_verb_forms import NoConjugationError
+from .copula_gen import CopulaGenerator
 from .decorators import validate_japanese_verb
+from .exceptions import UnsupportedBaseFormError, UnsupportedCopulaFormError
 from .negative_form_gen import NegativeVerbForms
 from .positive_form_gen import PositiveVerbForms
-from .utils import handle_irregular_verb
+from .utils import convert_args, convert_copula_args, handle_irregular_verb
+
+
+def generate_japanese_verb_by_str(
+    verb: str, verb_class: VerbClass, base_form_str: str, *args
+):
+    for base_form in BaseForm:
+        if base_form_str.lower() == base_form.value:
+            return generate_japanese_verb_form(
+                verb, verb_class, base_form, **convert_args(base_form, *args)
+            )
+    raise UnsupportedBaseFormError(f"Unsupported BaseForm string {base_form_str}")
+
+
+def generate_japanese_copula_by_str(copula_form_str: str, *args):
+    for copula_form in CopulaForm:
+        if copula_form_str.lower() == copula_form.value:
+            return generate_japanese_copula_form(
+                copula_form, **convert_copula_args(copula_form, *args)
+            )
+    raise UnsupportedCopulaFormError(f"Unsupported CopulaForm string {copula_form_str}")
+
+
+def generate_japanese_verb_form(
+    verb: str, verb_class: VerbClass, base_form: BaseForm, *args, **kwargs
+):
+    if base_form == BaseForm.PLAIN:
+        return JapaneseVerbFormGenerator.generate_plain_form(
+            verb, verb_class, *args, **kwargs
+        )
+    elif base_form == BaseForm.POLITE:
+        return JapaneseVerbFormGenerator.generate_polite_form(
+            verb, verb_class, *args, **kwargs
+        )
+    elif base_form == BaseForm.TE:
+        return JapaneseVerbFormGenerator.generate_te_form(
+            verb, verb_class, *args, **kwargs
+        )
+    elif base_form == BaseForm.CONDITIONAL:
+        return JapaneseVerbFormGenerator.generate_conditional_form(
+            verb, verb_class, *args, **kwargs
+        )
+    elif base_form == BaseForm.VOLITIONAL:
+        return JapaneseVerbFormGenerator.generate_volitional_form(
+            verb, verb_class, *args, **kwargs
+        )
+    elif base_form == BaseForm.POTENTIAL:
+        return JapaneseVerbFormGenerator.generate_potential_form(
+            verb, verb_class, *args, **kwargs
+        )
+    elif base_form == BaseForm.IMPERATIVE:
+        return JapaneseVerbFormGenerator.generate_imperative_form(
+            verb, verb_class, *args, **kwargs
+        )
+    elif base_form == BaseForm.PROVISIONAL:
+        return JapaneseVerbFormGenerator.generate_provisional_form(
+            verb, verb_class, *args, **kwargs
+        )
+    elif base_form == BaseForm.CAUSATIVE:
+        return JapaneseVerbFormGenerator.generate_causative_form(
+            verb, verb_class, *args, **kwargs
+        )
+    elif base_form == BaseForm.PASSIVE:
+        return JapaneseVerbFormGenerator.generate_passive_form(
+            verb, verb_class, *args, **kwargs
+        )
+    else:
+        raise UnsupportedBaseFormError("This BaseForm is not supported.")
+
+
+def generate_japanese_copula_form(copula_form: CopulaForm, *args, **kwargs):
+    if copula_form == CopulaForm.PLAIN:
+        return JapaneseVerbFormGenerator.copula.generate_plain_form(*args, **kwargs)
+    elif copula_form == CopulaForm.POLITE:
+        return JapaneseVerbFormGenerator.copula.generate_polite_form(*args, **kwargs)
+    elif copula_form == CopulaForm.CONDITIONAL:
+        return JapaneseVerbFormGenerator.copula.generate_conditional_form(
+            *args, **kwargs
+        )
+    elif copula_form == CopulaForm.PRESUMPTIVE:
+        return JapaneseVerbFormGenerator.copula.generate_presumptive_form(
+            *args, **kwargs
+        )
+    elif copula_form == CopulaForm.TE:
+        return JapaneseVerbFormGenerator.copula.generate_te_form(*args, **kwargs)
+    elif copula_form == CopulaForm.TARA:
+        return JapaneseVerbFormGenerator.copula.generate_tara_form(*args, **kwargs)
+    else:
+        raise UnsupportedCopulaFormError("This CopulaForm is not supported.")
 
 
 class JapaneseVerbFormGenerator:
     positive_verb_forms = PositiveVerbForms
     negative_verb_forms = NegativeVerbForms
-    copula = Copula
+    copula = CopulaGenerator
 
     @classmethod
     @validate_japanese_verb
@@ -89,6 +185,8 @@ class JapaneseVerbFormGenerator:
             return handle_irregular_verb(
                 verb, BaseForm.TE, formality=formality, polarity=polarity
             )
+        if formality == Formality.POLITE and polarity == Polarity.NEGATIVE:
+            raise NoConjugationError("Ther seems to be no polite negativete form...")
         if polarity == Polarity.POSITIVE:
             return cls.positive_verb_forms.generate_te_form(verb, verb_class, formality)
         return cls.negative_verb_forms.generate_te_form(verb, verb_class, formality)

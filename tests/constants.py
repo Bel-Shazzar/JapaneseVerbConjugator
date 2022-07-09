@@ -1,4 +1,12 @@
-from src.japverbconj.constants.enumerated_types import VerbClass
+from itertools import product
+from src.japverbconj.constants.enumerated_types import (
+    BaseForm,
+    CopulaForm,
+    Formality,
+    Polarity,
+    Tense,
+    VerbClass,
+)
 
 korean_with_japanese = "한국어처리기む"
 english_with_japanese = "Heloむ"
@@ -7,24 +15,25 @@ verb_incorrect_particle_ending = "飲ま"
 
 class GodanVerbNomu:
     # http://www.japaneseverbconjugator.com/VerbDetails.asp?txtVerb=%E9%A3%B2%E3%82%80
-    verb = "飲む"  # plain positive nonpast
+    romaji = "taberu"
     verb_class = VerbClass.GODAN
 
-    # Formal Verb Forms
-    polite_positive_nonpast = "飲みます"
-    polite_positive_past = "飲みました"
-    polite_negative_nonpast = "飲みません"
-    polite_negative_past = "飲みませんでした"
-
     # Plain Verb Forms
-    plain_positive_past = "飲んだ"  # ta form
-    plain_negative_nonpast = "飲まない"  # nai form
-    plain_negative_past = "飲まなかった"  # katta form
+    plain_nonpast_positive = "飲む"  # plain positive nonpast
+    plain_past_positive = "飲んだ"  # ta form
+    plain_nonpast_negative = "飲まない"  # nai form
+    plain_past_negative = "飲まなかった"  # katta form
+
+    # Formal Verb Forms
+    polite_nonpast_positive = "飲みます"
+    polite_past_positive = "飲みました"
+    polite_nonpast_negative = "飲みません"
+    polite_past_negative = "飲みませんでした"
 
     # Te form (gerund)
-    te_form_plain_positive = "飲んで"
-    te_form_plain_negative = "飲まなくて"
-    te_form_polite_positive = "飲みまして"
+    te_plain_positive = "飲んで"
+    te_plain_negative = "飲まなくて"
+    te_polite_positive = "飲みまして"
 
     # Conditional Verb Forms
     conditional_plain_positive = "飲んだら"
@@ -65,28 +74,31 @@ class GodanVerbNomu:
     # Provisional Verb Forms
     provisional_plain_positive = "飲めば"
     provisional_plain_negative = "飲まなければ"
+    provisional_polite_positive = "飲めば"
+    provisional_polite_negative = "飲まなければ"
 
 
 class GodanVerbAru:
     # https://www.japandict.com/%E6%9C%89%E3%82%8B?lang=eng#entry-1296400
-    verb = "ある"  # plain positive nonpast
+    romaji = "aru"
     verb_class = VerbClass.GODAN
 
     # Plain Verb Forms
-    plain_positive_past = "あった"
-    plain_negative_nonpast = "ない"
-    plain_negative_past = "なかった"
+    plain_nonpast_positive = "ある"
+    plain_past_positive = "あった"
+    plain_nonpast_negative = "ない"
+    plain_past_negative = "なかった"
 
     # Formal Verb Forms
-    polite_positive_nonpast = "あります"
-    polite_positive_past = "ありました"
-    polite_negative_nonpast = "ありません"
-    polite_negative_past = "ありませんでした"
+    polite_nonpast_positive = "あります"
+    polite_past_positive = "ありました"
+    polite_nonpast_negative = "ありません"
+    polite_past_negative = "ありませんでした"
 
     # Te form (gerund)
-    te_form_plain_positive = "あって"
-    te_form_plain_negative = "なくて"
-    te_form_polite_positive = "ありまして"
+    te_plain_positive = "あって"
+    te_plain_negative = "なくて"
+    te_polite_positive = "ありまして"
 
     # Conditional Verb Forms
     conditional_plain_positive = "あったら"
@@ -127,27 +139,30 @@ class GodanVerbAru:
     # Provisional Verb Forms
     provisional_plain_positive = "あれば"
     provisional_plain_negative = "なければ"
+    provisional_polite_positive = "あれば"
+    provisional_polite_negative = "なければ"
 
 
 class GodanVerbIku:
-    verb = "行く"  # plain positive nonpast
+    romaji = "iku"
     verb_class = VerbClass.GODAN
 
-    # Formal Verb Forms
-    polite_positive_nonpast = "行きます"
-    polite_positive_past = "行きました"
-    polite_negative_nonpast = "行きません"
-    polite_negative_past = "行きませんでした"
-
     # Plain Verb Forms
-    plain_positive_past = "行った"
-    plain_negative_nonpast = "行かない"
-    plain_negative_past = "行かなかった"
+    plain_nonpast_positive = "行く"
+    plain_past_positive = "行った"
+    plain_nonpast_negative = "行かない"
+    plain_past_negative = "行かなかった"
+
+    # Formal Verb Forms
+    polite_nonpast_positive = "行きます"
+    polite_past_positive = "行きました"
+    polite_nonpast_negative = "行きません"
+    polite_past_negative = "行きませんでした"
 
     # Te form (gerund)
-    te_form_plain_positive = "行って"
-    te_form_plain_negative = "行かなくて"
-    te_form_polite_positive = "行きまして"
+    te_plain_positive = "行って"
+    te_plain_negative = "行かなくて"
+    te_polite_positive = "行きまして"
 
     # Conditional Verb Forms
     conditional_plain_positive = "行ったら"
@@ -188,28 +203,31 @@ class GodanVerbIku:
     # Provisional Verb Forms
     provisional_plain_positive = "行けば"
     provisional_plain_negative = "行かなければ"
+    provisional_polite_positive = "行けば"
+    provisional_polite_negative = "行かなければ"
 
 
 class IchidanVerbTaberu:
     # http://www.japaneseverbconjugator.com/VerbDetails.asp?txtVerb=%E9%A3%9F%E3%81%B9%E3%82%8B
-    verb = "食べる"  # plain positive nonpast
+    romaji = "taberu"
     verb_class = VerbClass.ICHIDAN
 
-    # Formal Verb Forms
-    polite_positive_nonpast = "食べます"
-    polite_positive_past = "食べました"
-    polite_negative_nonpast = "食べません"
-    polite_negative_past = "食べませんでした"
-
     # Plain Verb Forms
-    plain_positive_past = "食べた"  # ta form
-    plain_negative_nonpast = "食べない"  # nai form
-    plain_negative_past = "食べなかった"  # katta form
+    plain_nonpast_positive = "食べる"
+    plain_past_positive = "食べた"
+    plain_nonpast_negative = "食べない"
+    plain_past_negative = "食べなかった"
+
+    # Formal Verb Forms
+    polite_nonpast_positive = "食べます"
+    polite_past_positive = "食べました"
+    polite_nonpast_negative = "食べません"
+    polite_past_negative = "食べませんでした"
 
     # Te form (gerund)
-    te_form_plain_positive = "食べて"
-    te_form_plain_negative = "食べなくて"
-    te_form_polite_positive = "食べまして"
+    te_plain_positive = "食べて"
+    te_plain_negative = "食べなくて"
+    te_polite_positive = "食べまして"
 
     # Conditional Verb Forms
     conditional_plain_positive = "食べたら"
@@ -250,28 +268,31 @@ class IchidanVerbTaberu:
     # Provisional Verb Forms
     provisional_plain_positive = "食べれば"
     provisional_plain_negative = "食べなければ"
+    provisional_polite_positive = "食べれば"
+    provisional_polite_negative = "食べなければ"
 
 
 class IrregularVerbSuru:
     # http://www.japaneseverbconjugator.com/Suru.asp
-    verb = "勉強する"  # plain positive nonpast
+    romaji = "benkyousuru"
     verb_class = VerbClass.IRREGULAR
 
-    # Formal Verb Forms
-    polite_positive_nonpast = "勉強します"
-    polite_positive_past = "勉強しました"
-    polite_negative_nonpast = "勉強しません"
-    polite_negative_past = "勉強しませんでした"
-
     # Plain Verb Forms
-    plain_positive_past = "勉強した"  # ta form
-    plain_negative_nonpast = "勉強しない"  # nai form
-    plain_negative_past = "勉強しなかった"  # katta form
+    plain_nonpast_positive = "勉強する"
+    plain_past_positive = "勉強した"
+    plain_nonpast_negative = "勉強しない"
+    plain_past_negative = "勉強しなかった"
+
+    # Formal Verb Forms
+    polite_nonpast_positive = "勉強します"
+    polite_past_positive = "勉強しました"
+    polite_nonpast_negative = "勉強しません"
+    polite_past_negative = "勉強しませんでした"
 
     # Te form (gerund)
-    te_form_plain_positive = "勉強して"
-    te_form_plain_negative = "勉強しなくて"
-    te_form_polite_positive = "勉強しまして"
+    te_plain_positive = "勉強して"
+    te_plain_negative = "勉強しなくて"
+    te_polite_positive = "勉強しまして"
 
     # Conditional Verb Forms
     conditional_plain_positive = "勉強したら"
@@ -285,10 +306,10 @@ class IrregularVerbSuru:
     volitional_plain_negative = "勉強しないだろう"
     volitional_polite_negative = "勉強しないでしょう"
 
-    # volitional_plain_positive_past = "勉強したろう"
-    # volitional_polite_positive_past = "勉強しましたろう"
-    # volitional_plain_negative_past = "勉強しなかっただろう"
-    # volitional_polite_negative_past = "勉強しなかたでしょう"
+    # volitional_plain_past_positive = "勉強したろう"
+    # volitional_polite_past_positive = "勉強しましたろう"
+    # volitional_plain_past_negative = "勉強しなかっただろう"
+    # volitional_polite_past_negative = "勉強しなかたでしょう"
 
     # Potential Verb Forms
     potential_plain_positive = "勉強できる"
@@ -323,24 +344,25 @@ class IrregularVerbSuru:
 
 class IrregularVerbKuru:
     # http://www.japaneseverbconjugator.com/Kuru.asp
-    verb = "くる"  # plain positive nonpast
+    romaji = "kuru"  # plain positive nonpast
     verb_class = VerbClass.IRREGULAR
 
-    # Formal Verb Forms
-    polite_positive_nonpast = "きます"
-    polite_positive_past = "きました"
-    polite_negative_nonpast = "きません"
-    polite_negative_past = "きませんでした"
-
     # Plain Verb Forms
-    plain_positive_past = "きた"  # ta form
-    plain_negative_nonpast = "こない"  # nai form
-    plain_negative_past = "こなかった"  # katta form
+    plain_nonpast_positive = "くる"  # plain positive nonpast
+    plain_past_positive = "きた"  # ta form
+    plain_nonpast_negative = "こない"  # nai form
+    plain_past_negative = "こなかった"  # katta form
+
+    # Formal Verb Forms
+    polite_nonpast_positive = "きます"
+    polite_past_positive = "きました"
+    polite_nonpast_negative = "きません"
+    polite_past_negative = "きませんでした"
 
     # Te form (gerund)
-    te_form_plain_positive = "きて"
-    te_form_plain_negative = "こなくて"
-    te_form_polite_positive = "きまして"
+    te_plain_positive = "きて"
+    te_plain_negative = "こなくて"
+    te_polite_positive = "きまして"
 
     # Conditional Verb Forms
     conditional_plain_positive = "きたら"
@@ -354,10 +376,10 @@ class IrregularVerbKuru:
     volitional_plain_positive = "こよう"
     volitional_plain_negative = "こないだろう"
 
-    # volitional_plain_positive_past = "きたろう"
-    # volitional_polite_positive_past = "きたでしょう"
-    # volitional_plain_negative_past = "こなかっただろう"
-    # volitional_polite_negative_past = "こなかったでしょう"
+    # volitional_plain_past_positive = "きたろう"
+    # volitional_polite_past_positive = "きたでしょう"
+    # volitional_plain_past_negative = "こなかっただろう"
+    # volitional_polite_past_negative = "こなかったでしょう"
 
     # Potential Verb Forms
     potential_plain_positive = "こられる"
@@ -392,24 +414,25 @@ class IrregularVerbKuru:
 
 class IrregularVerbKuruKanji:
     # http://www.japaneseverbconjugator.com/Kuru.asp
-    verb = "来る"  # plain positive nonpast
+    romaji = "kurukanji"
     verb_class = VerbClass.IRREGULAR
 
-    # Formal Verb Forms
-    polite_positive_nonpast = "来ます"
-    polite_positive_past = "来ました"
-    polite_negative_nonpast = "来ません"
-    polite_negative_past = "来ませんでした"
-
     # Plain Verb Forms
-    plain_positive_past = "来た"  # ta form
-    plain_negative_nonpast = "来ない"  # nai form
-    plain_negative_past = "来なかった"  # katta form
+    plain_nonpast_positive = "来る"
+    plain_past_positive = "来た"
+    plain_nonpast_negative = "来ない"
+    plain_past_negative = "来なかった"
+
+    # Formal Verb Forms
+    polite_nonpast_positive = "来ます"
+    polite_past_positive = "来ました"
+    polite_nonpast_negative = "来ません"
+    polite_past_negative = "来ませんでした"
 
     # Te form (gerund)
-    te_form_plain_positive = "来て"
-    te_form_plain_negative = "来なくて"
-    te_form_polite_positive = "来まして"
+    te_plain_positive = "来て"
+    te_plain_negative = "来なくて"
+    te_polite_positive = "来まして"
 
     # Conditional Verb Forms
     conditional_plain_positive = "来たら"
@@ -423,10 +446,10 @@ class IrregularVerbKuruKanji:
     volitional_polite_positive = "来ましょう"
     volitional_polite_negative = "来ないでしょう"
 
-    # volitional_plain_positive_past = "来たろう"
-    # volitional_polite_positive_past = "来たでしょう"
-    # volitional_plain_negative_past = "来なかっただろう"
-    # volitional_polite_negative_past = "来なかったでしょう"
+    # volitional_plain_past_positive = "来たろう"
+    # volitional_polite_past_positive = "来たでしょう"
+    # volitional_plain_past_negative = "来なかっただろう"
+    # volitional_polite_past_negative = "来なかったでしょう"
 
     # Potential Verb Forms
     potential_plain_positive = "来られる"
@@ -460,31 +483,110 @@ class IrregularVerbKuruKanji:
 
 
 class CopulaDa:
-    plain_positive = "だ"
-    polite_positive = "です"
+    plain_nonpast_positive = "だ"
+    plain_nonpast_negative = "ではない"
+    plain_past_positive = "だった"
+    plain_past_negative = "なかった"
+    polite_nonpast_positive = "です"
+    polite_nonpast_negative = "ではありません"
+    polite_past_positive = "でした"
+    polite_past_negative = "ではありませんでした"
     conditional = "なら"
-    presumptive_plain = "だろう"
-    presumptive_polite = "でしょう"
-    te_form_plain = "で"
-    te_form_polite = "でして"
-    plain_past = "だった"
-    polite_past = "でした"
+    presumptive_plain_positive = "だろう"
+    presumptive_plain_negative = "ではないだろう"
+    presumptive_polite_positive = "でしょう"
+    presumptive_polite_negative = "ではないでしょう"
+    te_plain = "で"
+    te_polite = "でして"
     tara_plain = "だったら"
     tara_polite = "でしたら"
-    plain_negative = "ではない"
-    polite_negative = "ではありません"
-    presumptive_plain_negative = "ではないだろう"
-    presumptive_polite_negative = "ではないでしょう"
-    plain_past_negative = "なかった"
-    polite_past_negative = "ではありませんでした"
 
 
-PARAMETER_LIST = [
-    ("godan_nomu", GodanVerbNomu),
-    ("godan_aru", GodanVerbAru),
-    ("godan_iku", GodanVerbIku),
-    ("ichidan_taberu", IchidanVerbTaberu),
-    ("irreg_suru", IrregularVerbSuru),
-    ("irreg_kuru", IrregularVerbKuru),
-    ("irreg_kuru_kanji", IrregularVerbKuruKanji),
+VERB_LIST = [
+    GodanVerbNomu,
+    GodanVerbAru,
+    GodanVerbIku,
+    IchidanVerbTaberu,
+    IrregularVerbSuru,
+    IrregularVerbKuru,
+    IrregularVerbKuruKanji,
+]
+
+VERB_FORM_PARAMETERS = [
+    *[
+        (
+            f"{verb.romaji}_{form.name.lower()}_"
+            + "_".join([arg.name.lower() for arg in args]),
+            verb,
+            form,
+            *args,
+        )
+        for verb, form, *args in product(
+            VERB_LIST, [BaseForm.PLAIN, BaseForm.POLITE], Tense, Polarity
+        )
+    ],
+    *[
+        (
+            f"{verb.romaji}_{form.name.lower()}_"
+            + "_".join([arg.name.lower() for arg in args]),
+            verb,
+            form,
+            *args,
+        )
+        for verb, form, *args in product(
+            VERB_LIST,
+            [
+                BaseForm.TE,
+                BaseForm.CONDITIONAL,
+                BaseForm.VOLITIONAL,
+                BaseForm.POTENTIAL,
+                BaseForm.IMPERATIVE,
+                BaseForm.PROVISIONAL,
+                BaseForm.CAUSATIVE,
+                BaseForm.PASSIVE,
+            ],
+            Formality,
+            Polarity,
+        )
+    ],
+]
+COPULA_FORM_PARAMETERS = [
+    *[
+        (
+            f"copula_{form.name.lower()}_"
+            + "_".join([arg.name.lower() for arg in args]),
+            form,
+            *args,
+        )
+        for form, *args in product(
+            [CopulaForm.PLAIN, CopulaForm.POLITE], Tense, Polarity
+        )
+    ],
+    *[
+        (
+            f"copula_{form.name.lower()}_"
+            + "_".join([arg.name.lower() for arg in args]),
+            form,
+            *args,
+        )
+        for form, *args in product([CopulaForm.PRESUMPTIVE], Formality, Polarity)
+    ],
+    *[
+        (
+            f"copula_{form.name.lower()}_"
+            + "_".join([arg.name.lower() for arg in args]),
+            form,
+            *args,
+        )
+        for form, *args in product([CopulaForm.TE, CopulaForm.TARA], Formality)
+    ],
+    *[
+        (
+            f"copula_{form.name.lower()}_"
+            + "_".join([arg.name.lower() for arg in args]),
+            form,
+            *args,
+        )
+        for form, *args in product([CopulaForm.CONDITIONAL])
+    ],
 ]

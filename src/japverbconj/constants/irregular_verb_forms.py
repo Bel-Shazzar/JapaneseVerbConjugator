@@ -57,6 +57,12 @@ SURU_CONJUGATION[BaseForm.TE][Formality.POLITE][Tense.NONPAST][
 ] = "しまして"
 
 SURU_CONJUGATION[BaseForm.CONDITIONAL][Formality.PLAIN][Tense.NONPAST][
+    Polarity.POSITIVE
+] = "したら"
+SURU_CONJUGATION[BaseForm.CONDITIONAL][Formality.POLITE][Tense.NONPAST][
+    Polarity.POSITIVE
+] = "しましたら"
+SURU_CONJUGATION[BaseForm.CONDITIONAL][Formality.PLAIN][Tense.NONPAST][
     Polarity.NEGATIVE
 ] = "しなかったら"
 SURU_CONJUGATION[BaseForm.CONDITIONAL][Formality.POLITE][Tense.NONPAST][
@@ -199,6 +205,12 @@ KURU_CONJUGATION[BaseForm.TE][Formality.POLITE][Tense.NONPAST][
     Polarity.POSITIVE
 ] = "きまして"
 
+KURU_CONJUGATION[BaseForm.CONDITIONAL][Formality.PLAIN][Tense.NONPAST][
+    Polarity.POSITIVE
+] = "きたら"
+KURU_CONJUGATION[BaseForm.CONDITIONAL][Formality.POLITE][Tense.NONPAST][
+    Polarity.POSITIVE
+] = "きましたら"
 KURU_CONJUGATION[BaseForm.CONDITIONAL][Formality.PLAIN][Tense.NONPAST][
     Polarity.NEGATIVE
 ] = "こなかったら"

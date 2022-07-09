@@ -82,27 +82,108 @@ You should be good to go! See the **Usage** section on how to get started using 
 
 ## Usage
 
-Here is an example of how to import the library and use it.
+The easiest to use method is the following:
 
+```python
+from japverbconj.constants.enumerated_types import VerbClass
+from japverbconj.verb_form_gen import generate_japanese_verb_by_str
+
+generate_japanese_verb_by_str("飲む", VerbClass.GODAN, "pla") # returns '飲む
+generate_japanese_verb_by_str("飲む", VerbClass.GODAN, "pla", "past", "neg") # returns '飲まなかった'
+generate_japanese_verb_by_str("飲む", VerbClass.GODAN, "pass", "pol", "neg") # returns '飲まれません'
+```
+The strings after the VerbClass are built like this:
+
+The first string is required and must determine the desired BaseForm from the following.
+```python
+BaseForm.PLAIN = "pla"
+BaseForm.POLITE = "pol"
+BaseForm.TE = "te"
+BaseForm.CONDITIONAL = "cond"
+BaseForm.VOLITIONAL = "vol"
+BaseForm.POTENTIAL = "pot"
+BaseForm.IMPERATIVE = "imp"
+BaseForm.PROVISIONAL = "prov"
+BaseForm.CAUSATIVE = "caus"
+BaseForm.PASSIVE = "pass"
+```
+
+The following arguments determine the specific conjugation, based on Formality, Tense and Polarity.
+```python
+Formality.PLAIN = "pla"
+Formality.POLITE = "pol"
+
+Tense.NONPAST = "nonpast"
+Tense.PAST = "past"
+
+Polarity.POSITIVE = "pos"
+Polarity.NEGATIVE = "neg"
+```
+
+* if an argument is left out, the first choice in the list above is assumed
+* the order of the arguments do not matter
+* it is not possible to give arguments that are not present in the corresponding BaseForm, see following table for details
+
+| BaseForm | Possible arguments |
+| - | - |
+| BaseForm.PLAIN<br>BaseForm.POLITE | Tense, Polarity |
+| BaseForm.TE*<br>BaseForm.CONDITIONAL<br>BaseForm.VOLITIONAL<br>BaseForm.POTENTIAL<br>BaseForm.IMPERATIVE<br>BaseForm.PROVISIONAL<br>BaseForm.CAUSATIVE<br>BaseForm.PASSIVE | Formality, Polarity |
+
+\* except for Formality.POLITE + Polarity.NEGATIVE - if you know whether and if yes, how this form is built, please [contact](mailto:belshazzar314+japverbconjgen@gmail.com) me!
+
+
+If you prefer the more rigorous earlier version of calling individual methods for each form, you can still use that like this.
 ```python
 from japverbconj.constants.enumerated_types import Formality, Polarity, Tense, VerbClass
 from japverbconj.verb_form_gen import JapaneseVerbFormGenerator as jvfg
 
 jvfg.generate_plain_form("飲む", VerbClass.GODAN, Tense.NONPAST, Polarity.POSITIVE) # returns '飲む'
-jvfg.generate_plain_form("飲む", VerbClass.GODAN, Formality.POLITE, Polarity.NEGATIVE) # returns '飲まない'
+jvfg.generate_plain_form("飲む", VerbClass.GODAN, Tense.NONPAST, Polarity.NEGATIVE) # returns '飲まない'
 ```
 
 The library will try to help validate the correctness of the verb by checking for invalid verb lengths, non-Japanese characters, and invalid verb endings. **Limitation**: this library cannot identify Chinese words with valid Japanese particle endings or nonexistent Japanese verbs.
 
-AHere is an example of how to use the copula generator-
+### Copula
+
+Generation of copula forms works similarly:
+
+```python
+from japverbconj.verb_form_gen import generate_japanese_copula_by_str
+
+generate_japanese_copula_by_str("plain") # returns 'だ'
+generate_japanese_copula_by_str("pres", "pol", "neg") # returns 'ではないでしょう'
+```
+
+The first argument is required and has to be one of the strings:
+
+```python
+CopulaForm.PLAIN = "pla"
+CopulaForm.POLITE = "pol"
+CopulaForm.TE = "te"
+CopulaForm.CONDITIONAL = "cond"
+CopulaForm.TARA = "tara"
+CopulaForm.PRESUMPTIVE = "pres"
+```
+
+The following strings can be of the corresponding arguments
+
+| CopulaForm | Possible arguments |
+| - | - |
+| CopulaForm.PLAIN<br>CopulaForm.POLITE | Tense, Polarity |
+| CopulaForm.TE<br>CopulaForm.TARA | Formality |
+| CopulaForm.CONDITIONAL | |
+| CopulaForm.PRESUMPTIVE | Formality, Polarity |
+
+The original way of calling individual methods also remains.
 
 ```python 
 from japverbconj.constants.enumerated_types import Formality, Polarity, Tense, VerbClass
 from japverbconj.verb_form_gen import JapaneseVerbFormGenerator as jvfg
 
 jvfg.copula.generate_plain_form(Tense.NONPAST, Polarity.POSITIVE) # returns 'だ'
-jvfg.copula.generate_presumptive_form(Tense.NONPAST, Polarity.POSITIVE) # returns 'ではないでしょう'
+jvfg.copula.generate_presumptive_form(Formality.POLITE, Polarity.NEGATIVE) # returns 'ではないでしょう'
 ```
+
 
 ## Tests
 The coverage package is used to run the unittests. The configuration is defined in `.coveragerc`
