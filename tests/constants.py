@@ -495,7 +495,7 @@ class CopulaDa:
     presumptive_plain_positive = "だろう"
     presumptive_plain_negative = "ではないだろう"
     presumptive_polite_positive = "でしょう"
-    presumptive_polite_negative = "ではありませんでしょう"
+    presumptive_polite_negative = "ではないでしょう"
     te_plain = "で"
     te_polite = "でして"
     tara_plain = "だったら"

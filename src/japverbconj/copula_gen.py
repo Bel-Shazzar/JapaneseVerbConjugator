@@ -45,28 +45,26 @@ class CopulaGenerator:
                 return f"{POLITE_DA_NEGATIVE_ENDING}{PAST_DA_POLITE_POSITIVE_ENDING}"
 
     @classmethod
+    def generate_te_form(cls, formality: Formality):
+        if formality == Formality.PLAIN:
+            return TE_FORM_DA_PLAIN_POSITIVE_ENDING
+        else:
+            return TE_FORM_DA_POLITE_POSITIVE_ENDING
+
+    @classmethod
     def generate_conditional_form(cls):
         return CONDITIONAL_DA_PLAIN_POSITIVE_ENDING
 
     @classmethod
     def generate_presumptive_form(cls, formality: Formality, polarity: Polarity):
         stem = ""
+        if polarity == Polarity.NEGATIVE:
+            stem = PLAIN_DA_NEGATIVE_ENDING
         if formality == Formality.PLAIN:
-            if polarity == Polarity.NEGATIVE:
-                stem = PLAIN_DA_NEGATIVE_ENDING
             ending = PRESUMPTIVE_DA_PLAIN_POSITIVE_ENDING
         else:
-            if polarity == Polarity.NEGATIVE:
-                stem = POLITE_DA_NEGATIVE_ENDING
             ending = PRESUMPTIVE_DA_POLITE_POSITIVE_ENDING
         return f"{stem}{ending}"
-
-    @classmethod
-    def generate_te_form(cls, formality: Formality):
-        if formality == Formality.PLAIN:
-            return TE_FORM_DA_PLAIN_POSITIVE_ENDING
-        else:
-            return TE_FORM_DA_POLITE_POSITIVE_ENDING
 
     @classmethod
     def generate_tara_form(cls, formality: Formality):
