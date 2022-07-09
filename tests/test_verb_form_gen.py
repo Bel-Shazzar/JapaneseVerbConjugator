@@ -44,6 +44,20 @@ class TestAllVerbForms(unittest.TestCase):
             )
             self.assertEqual(result, getattr(verb, attribute_name))
 
+    @parameterized.expand(VERB_FORM_PARAMETERS)
+    def test_reversed(self, _, verb, base_form: BaseForm, *args):
+        attribute_name = "_".join(
+            [base_form.name.lower(), *[arg.name.lower() for arg in args]]
+        )
+        if hasattr(verb, attribute_name):
+            result = generate_japanese_verb_by_str(
+                verb.plain_nonpast_positive,
+                verb.verb_class,
+                base_form.value,
+                *[arg.value for arg in reversed(args)],
+            )
+            self.assertEqual(result, getattr(verb, attribute_name))
+
     def test_unsupported_base_form_error(self):
         with self.assertRaises(UnsupportedBaseFormError):
             generate_japanese_verb_form("", None, -1)
@@ -74,6 +88,18 @@ class TestCopula(unittest.TestCase):
             self.assertTrue(
                 hasattr(CopulaDa, attribute_name),
                 f"da should have attribute {attribute_name} -> {result}",
+            )
+            self.assertEqual(result, getattr(CopulaDa, attribute_name))
+
+    @parameterized.expand(COPULA_FORM_PARAMETERS)
+    def test_reversed(self, _, copula_form: CopulaForm, *args):
+        attribute_name = "_".join(
+            [copula_form.name.lower(), *[arg.name.lower() for arg in args]]
+        )
+        if hasattr(CopulaDa, attribute_name):
+            result = generate_japanese_copula_by_str(
+                copula_form.value,
+                *[arg.value for arg in reversed(args)],
             )
             self.assertEqual(result, getattr(CopulaDa, attribute_name))
 
