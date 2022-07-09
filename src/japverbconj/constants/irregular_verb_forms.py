@@ -1,5 +1,5 @@
 from .verb_ending_constants import KURU_KANJI
-from japverbconj.exceptions import NonIrregularVerbError
+from .exceptions import NonIrregularVerbError
 from .enumerated_types import *
 
 

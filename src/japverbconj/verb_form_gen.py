@@ -8,7 +8,7 @@ from .constants.enumerated_types import (
 from .constants.irregular_verb_forms import NoConjugationError
 from .copula_gen import CopulaGenerator
 from .decorators import validate_japanese_verb
-from .exceptions import UnsupportedBaseFormError, UnsupportedCopulaFormError
+from .constants.exceptions import UnsupportedBaseFormError, UnsupportedCopulaFormError
 from .negative_form_gen import NegativeVerbForms
 from .positive_form_gen import PositiveVerbForms
 from .utils import convert_args, convert_copula_args, handle_irregular_verb

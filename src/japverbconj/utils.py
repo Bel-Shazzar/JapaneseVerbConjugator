@@ -2,7 +2,6 @@ from .constants.irregular_verb_forms import get_irregular_conjugation
 from .constants.enumerated_types import *
 from .constants.particle_constants import *
 from .constants.verb_ending_constants import *
-from .exceptions import NonIrregularVerbError
 
 
 # ---------------------------------------------------------- #
