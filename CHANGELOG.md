@@ -1,3 +1,6 @@
+## 2022-07-09 (v0.3.0)
+- add new method to generate by strings instead of Enums
+
 ## 2022-07-03 (v0.2.1)
 - fix exceptions for verb iku
 
