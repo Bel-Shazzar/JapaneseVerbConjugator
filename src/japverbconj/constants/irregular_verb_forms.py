@@ -1,7 +1,5 @@
-from lib2to3.pytree import Base
-from tkinter.tix import Form
-from src.japverbconj.constants.verb_ending_constants import KURU_KANJI
-from src.japverbconj.exceptions import NonIrregularVerbError
+from .verb_ending_constants import KURU_KANJI
+from japverbconj.exceptions import NonIrregularVerbError
 from .enumerated_types import *
 
 
@@ -361,7 +359,3 @@ def get_irregular_conjugation(
         )
     else:
         raise NonIrregularVerbError("Non-Irregular Verb Ending Found", verb)
-
-
-if __name__ == "__main__":
-    print(create_conjugation_dict())
