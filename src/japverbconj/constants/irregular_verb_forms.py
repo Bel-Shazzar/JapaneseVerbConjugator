@@ -1,6 +1,6 @@
-from .verb_ending_constants import KURU_KANJI
-from .exceptions import NonIrregularVerbError
 from .enumerated_types import *
+from .exceptions import NonIrregularVerbError
+from .irregular_verb_groups import KURU_KANJI
 
 
 class NoConjugationError(Exception):

@@ -1,4 +1,5 @@
 from .constants.enumerated_types import Formality, Tense, VerbClass
+from .constants.irregular_verb_groups import *
 from .constants.particle_constants import *
 from .constants.verb_ending_constants import *
 from .utils import (
