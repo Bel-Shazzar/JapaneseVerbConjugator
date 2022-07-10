@@ -1,5 +1,5 @@
 from .constants.enumerated_types import Formality, Tense, VerbClass
-from .constants.irregular_verb_groups import KUDASAI
+from .constants.irregular_verb_groups import KUDASAI, NASARU_GROUP
 from .constants.particle_constants import *
 from .constants.verb_ending_constants import *
 from .utils import (
@@ -54,7 +54,10 @@ class PositiveVerbForms:
             ending = MASU_POSITIVE_PAST
 
         if verb_class == VerbClass.GODAN:
-            verb_stem = map_dictionary_to_i_ending(verb)
+            if verb in NASARU_GROUP:
+                verb_stem = f"{get_verb_stem(verb, verb_class)}{I_PARTICLE}"
+            else:
+                verb_stem = map_dictionary_to_i_ending(verb)
         else:
             verb_stem = get_verb_stem(verb, verb_class)
         return f"{verb_stem}{ending}"
@@ -77,7 +80,10 @@ class PositiveVerbForms:
         else:
             ending = TE_FORM_POLITE_ENDING
         if verb_class == VerbClass.GODAN:
-            verb_stem = map_dictionary_to_i_ending(verb)
+            if verb in NASARU_GROUP and formality == Formality.POLITE:
+                verb_stem = f"{get_verb_stem(verb, verb_class)}{I_PARTICLE}"
+            else:
+                verb_stem = map_dictionary_to_i_ending(verb)
         else:
             verb_stem = get_verb_stem(verb, verb_class)
         return f"{verb_stem}{ending}"
@@ -129,7 +135,10 @@ class PositiveVerbForms:
                 verb_stem = map_dictionary_to_o_ending(verb)
                 ending = U_PARTICLE
             else:
-                verb_stem = map_dictionary_to_i_ending(verb)
+                if verb in NASARU_GROUP:
+                    verb_stem = f"{get_verb_stem(verb, verb_class)}{I_PARTICLE}"
+                else:
+                    verb_stem = map_dictionary_to_i_ending(verb)
                 ending = VOLITIONAL_POLITE_ENDING
         else:
             verb_stem = get_verb_stem(verb, verb_class)
@@ -192,7 +201,10 @@ class PositiveVerbForms:
         """
         if formality == Formality.PLAIN:
             if verb_class == VerbClass.GODAN:
-                verb_stem = map_dictionary_to_e_ending(verb)
+                if verb in NASARU_GROUP:
+                    verb_stem = f"{get_verb_stem(verb,verb_class)}{I_PARTICLE}"
+                else:
+                    verb_stem = map_dictionary_to_e_ending(verb)
                 ending = ""
             else:
                 verb_stem = get_verb_stem(verb, verb_class)

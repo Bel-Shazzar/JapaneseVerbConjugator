@@ -56,7 +56,10 @@ class NegativeVerbForms:
         else:
             ending = MASU_NEGATIVE_PAST
         if verb_class == VerbClass.GODAN:
-            verb_stem = map_dictionary_to_i_ending(verb)
+            if verb in NASARU_GROUP:
+                verb_stem = f"{get_verb_stem(verb, verb_class)}{I_PARTICLE}"
+            else:
+                verb_stem = map_dictionary_to_i_ending(verb)
         else:
             verb_stem = get_verb_stem(verb, verb_class)
         return f"{verb_stem}{ending}"
