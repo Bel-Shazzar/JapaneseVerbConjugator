@@ -207,6 +207,70 @@ class GodanVerbIku:
     provisional_polite_negative = "行かなければ"
 
 
+class GodanVerbKudasaru:
+    romaji = "kudasaru"
+    verb_class = VerbClass.GODAN
+
+    # Plain Verb Forms
+    plain_nonpast_positive = "くださる"
+    plain_past_positive = "くださった"
+    plain_nonpast_negative = "くださらない"
+    plain_past_negative = "くださらなかった"
+
+    # Formal Verb Forms
+    polite_nonpast_positive = "くださいます"
+    polite_past_positive = "くださいました"
+    polite_nonpast_negative = "くださいません"
+    polite_past_negative = "くださいませんでした"
+
+    # Te form (gerund)
+    te_plain_positive = "くださって"
+    te_plain_negative = "くださらなくて"
+    te_polite_positive = "くださいまして"
+
+    # Conditional Verb Forms
+    conditional_plain_positive = "くださったら"
+    conditional_plain_negative = "くださらなかったら"
+    conditional_polite_positive = "くださいましたら"
+    conditional_polite_negative = "くださいませんでしたら"
+
+    # Volitional Verb Forms
+    volitional_plain_positive = "くださろう"
+    volitional_plain_negative = "くださらないだろう"
+    volitional_polite_positive = "くださいましょう"
+    volitional_polite_negative = "くださらないでしょう"
+
+    # Potential Verb Forms
+    potential_plain_positive = "くだされる"
+    potential_plain_negative = "くだされない"
+    potential_polite_positive = "くだされます"
+    potential_polite_negative = "くだされません"
+
+    # Imperative Verb Forms
+    imperative_plain_positive = "ください"
+    imperative_plain_negative = "くださるな"
+    imperative_polite_positive = "くださってください"
+    imperative_polite_negative = "くださらないでください"
+
+    # Causative Verb Forms
+    causative_plain_positive = "くださらせる"
+    causative_plain_negative = "くださらせない"
+    causative_polite_positive = "くださらせます"
+    causative_polite_negative = "くださらせません"
+
+    # Passive Verb Forms
+    passive_plain_positive = "くださられる"
+    passive_plain_negative = "くださられない"
+    passive_polite_positive = "くださられます"
+    passive_polite_negative = "くださられません"
+
+    # Provisional Verb Forms
+    provisional_plain_positive = "くだされば"
+    provisional_plain_negative = "くださらなければ"
+    provisional_polite_positive = "くだされば"
+    provisional_polite_negative = "くださらなければ"
+
+
 class IchidanVerbTaberu:
     # http://www.japaneseverbconjugator.com/VerbDetails.asp?txtVerb=%E9%A3%9F%E3%81%B9%E3%82%8B
     romaji = "taberu"
@@ -506,6 +570,7 @@ VERB_LIST = [
     GodanVerbNomu,
     GodanVerbAru,
     GodanVerbIku,
+    GodanVerbKudasaru,
     IchidanVerbTaberu,
     IrregularVerbSuru,
     IrregularVerbKuru,

@@ -1,5 +1,6 @@
-from .constants.irregular_verb_forms import get_irregular_conjugation
 from .constants.enumerated_types import *
+from .constants.irregular_verb_forms import get_irregular_conjugation
+from .constants.irregular_verb_groups import *
 from .constants.particle_constants import *
 from .constants.verb_ending_constants import *
 
@@ -133,10 +134,10 @@ def base_te_ta_form(
     if verb_class == VerbClass.ICHIDAN:
         verb_ending = regular_ending
     else:
-        if particle_ending in [RU_PARTICLE, TSU_PARTICLE, U_PARTICLE] or verb in [
-            IKU,
-            IKU_KANJI,
-        ]:
+        if (
+            particle_ending in [RU_PARTICLE, TSU_PARTICLE, U_PARTICLE]
+            or verb in IKU_GROUP
+        ):
             verb_ending = f"{CHISAI_TSU_PARTICLE}{regular_ending}"
         elif particle_ending in [BU_PARTICLE, MU_PARTICLE, NU_PARTICLE]:
             verb_ending = f"{N_PARTICLE}{dakuten_ending}"

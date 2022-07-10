@@ -1,4 +1,5 @@
 from .constants.enumerated_types import Formality, Tense, VerbClass
+from .constants.irregular_verb_groups import *
 from .constants.particle_constants import *
 from .constants.verb_ending_constants import *
 from .utils import (
@@ -55,7 +56,10 @@ class NegativeVerbForms:
         else:
             ending = MASU_NEGATIVE_PAST
         if verb_class == VerbClass.GODAN:
-            verb_stem = map_dictionary_to_i_ending(verb)
+            if verb in NASARU_GROUP:
+                verb_stem = f"{get_verb_stem(verb, verb_class)}{I_PARTICLE}"
+            else:
+                verb_stem = map_dictionary_to_i_ending(verb)
         else:
             verb_stem = get_verb_stem(verb, verb_class)
         return f"{verb_stem}{ending}"

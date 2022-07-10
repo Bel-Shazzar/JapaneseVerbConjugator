@@ -43,20 +43,15 @@ class TestAllVerbForms(unittest.TestCase):
                 f"verb {verb} should have attribute {attribute_name} -> {result}",
             )
             self.assertEqual(result, getattr(verb, attribute_name))
-
-    @parameterized.expand(VERB_FORM_PARAMETERS)
-    def test_reversed(self, _, verb, base_form: BaseForm, *args):
-        attribute_name = "_".join(
-            [base_form.name.lower(), *[arg.name.lower() for arg in args]]
-        )
-        if hasattr(verb, attribute_name):
-            result = generate_japanese_verb_by_str(
-                verb.plain_nonpast_positive,
-                verb.verb_class,
-                base_form.value,
-                *[arg.value for arg in reversed(args)],
+            self.assertEqual(
+                result,
+                generate_japanese_verb_by_str(
+                    verb.plain_nonpast_positive,
+                    verb.verb_class,
+                    base_form.value,
+                    *[arg.value for arg in reversed(args)],
+                ),
             )
-            self.assertEqual(result, getattr(verb, attribute_name))
 
     def test_unsupported_base_form_error(self):
         with self.assertRaises(UnsupportedBaseFormError):

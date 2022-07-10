@@ -1,3 +1,6 @@
+## 2022-07-10 (v0.3.2)
+- add exceptions for [nasaru group](https://conjugator.reverso.net/conjugation-rules-model-japanese/model-%E3%81%AA%E3%81%95%E3%82%8B.html)
+
 ## 2022-07-09 (v0.3.1)
 - fix import error
 
