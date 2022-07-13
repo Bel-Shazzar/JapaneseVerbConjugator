@@ -20,20 +20,31 @@ class GodanVerbNomu:
 
     # Plain Verb Forms
     plain_nonpast_positive = "飲む"  # plain positive nonpast
-    plain_past_positive = "飲んだ"  # ta form
     plain_nonpast_negative = "飲まない"  # nai form
+    plain_past_positive = "飲んだ"  # ta form
     plain_past_negative = "飲まなかった"  # katta form
 
     # Formal Verb Forms
     polite_nonpast_positive = "飲みます"
-    polite_past_positive = "飲みました"
     polite_nonpast_negative = "飲みません"
+    polite_past_positive = "飲みました"
     polite_past_negative = "飲みませんでした"
 
     # Te form (gerund)
     te_plain_positive = "飲んで"
     te_plain_negative = "飲まなくて"
     te_polite_positive = "飲みまして"
+
+    # Ta Forms
+    ta_plain_positive = "飲んだ"  # ta form
+    ta_plain_negative = "飲まなかった"  # katta form
+    ta_polite_positive = "飲みました"
+    ta_polite_negative = "飲みませんでした"
+
+    # Tari form
+    tari_plain_positive = "飲んだり"
+    tari_plain_negative = "飲まなくたり"
+    tari_polite_positive = "飲みましたり"
 
     # Conditional Verb Forms
     conditional_plain_positive = "飲んだら"
@@ -85,20 +96,31 @@ class GodanVerbAru:
 
     # Plain Verb Forms
     plain_nonpast_positive = "ある"
-    plain_past_positive = "あった"
     plain_nonpast_negative = "ない"
+    plain_past_positive = "あった"
     plain_past_negative = "なかった"
 
     # Formal Verb Forms
     polite_nonpast_positive = "あります"
-    polite_past_positive = "ありました"
     polite_nonpast_negative = "ありません"
+    polite_past_positive = "ありました"
     polite_past_negative = "ありませんでした"
 
     # Te form (gerund)
     te_plain_positive = "あって"
     te_plain_negative = "なくて"
     te_polite_positive = "ありまして"
+
+    # Ta Froms
+    ta_plain_positive = "あった"
+    ta_plain_negative = "なかった"
+    ta_polite_positive = "ありました"
+    ta_polite_negative = "ありませんでした"
+
+    # Tari form
+    tari_plain_positive = "あったり"
+    tari_plain_negative = "なくたり"
+    tari_polite_positive = "ありましたり"
 
     # Conditional Verb Forms
     conditional_plain_positive = "あったら"
@@ -149,20 +171,31 @@ class GodanVerbIku:
 
     # Plain Verb Forms
     plain_nonpast_positive = "行く"
-    plain_past_positive = "行った"
     plain_nonpast_negative = "行かない"
+    plain_past_positive = "行った"
     plain_past_negative = "行かなかった"
 
     # Formal Verb Forms
     polite_nonpast_positive = "行きます"
-    polite_past_positive = "行きました"
     polite_nonpast_negative = "行きません"
+    polite_past_positive = "行きました"
     polite_past_negative = "行きませんでした"
 
     # Te form (gerund)
     te_plain_positive = "行って"
     te_plain_negative = "行かなくて"
     te_polite_positive = "行きまして"
+
+    # Ta Forms
+    ta_plain_positive = "行った"
+    ta_plain_negative = "行かなかった"
+    ta_polite_positive = "行きました"
+    ta_polite_negative = "行きませんでした"
+
+    # Tari form
+    tari_plain_positive = "行ったり"
+    tari_plain_negative = "行かなくたり"
+    tari_polite_positive = "行きましたり"
 
     # Conditional Verb Forms
     conditional_plain_positive = "行ったら"
@@ -213,20 +246,31 @@ class GodanVerbKudasaru:
 
     # Plain Verb Forms
     plain_nonpast_positive = "くださる"
-    plain_past_positive = "くださった"
     plain_nonpast_negative = "くださらない"
+    plain_past_positive = "くださった"
     plain_past_negative = "くださらなかった"
 
     # Formal Verb Forms
     polite_nonpast_positive = "くださいます"
-    polite_past_positive = "くださいました"
     polite_nonpast_negative = "くださいません"
+    polite_past_positive = "くださいました"
     polite_past_negative = "くださいませんでした"
 
     # Te form (gerund)
     te_plain_positive = "くださって"
     te_plain_negative = "くださらなくて"
     te_polite_positive = "くださいまして"
+
+    # Ta Forms
+    ta_plain_positive = "くださった"
+    ta_plain_negative = "くださらなかった"
+    ta_polite_positive = "くださいました"
+    ta_polite_negative = "くださいませんでした"
+
+    # Tari form
+    tari_plain_positive = "くださったり"
+    tari_plain_negative = "くださらなくたり"
+    tari_polite_positive = "くださいましたり"
 
     # Conditional Verb Forms
     conditional_plain_positive = "くださったら"
@@ -278,20 +322,31 @@ class IchidanVerbTaberu:
 
     # Plain Verb Forms
     plain_nonpast_positive = "食べる"
-    plain_past_positive = "食べた"
     plain_nonpast_negative = "食べない"
+    plain_past_positive = "食べた"
     plain_past_negative = "食べなかった"
 
     # Formal Verb Forms
     polite_nonpast_positive = "食べます"
-    polite_past_positive = "食べました"
     polite_nonpast_negative = "食べません"
+    polite_past_positive = "食べました"
     polite_past_negative = "食べませんでした"
 
     # Te form (gerund)
     te_plain_positive = "食べて"
     te_plain_negative = "食べなくて"
     te_polite_positive = "食べまして"
+
+    # Ta Forms
+    ta_plain_positive = "食べた"
+    ta_plain_negative = "食べなかった"
+    ta_polite_positive = "食べました"
+    ta_polite_negative = "食べませんでした"
+
+    # Tari form
+    tari_plain_positive = "食べたり"
+    tari_plain_negative = "食べなくたり"
+    tari_polite_positive = "食べましたり"
 
     # Conditional Verb Forms
     conditional_plain_positive = "食べたら"
@@ -343,20 +398,31 @@ class IrregularVerbSuru:
 
     # Plain Verb Forms
     plain_nonpast_positive = "勉強する"
-    plain_past_positive = "勉強した"
     plain_nonpast_negative = "勉強しない"
+    plain_past_positive = "勉強した"
     plain_past_negative = "勉強しなかった"
 
     # Formal Verb Forms
     polite_nonpast_positive = "勉強します"
-    polite_past_positive = "勉強しました"
     polite_nonpast_negative = "勉強しません"
+    polite_past_positive = "勉強しました"
     polite_past_negative = "勉強しませんでした"
 
     # Te form (gerund)
     te_plain_positive = "勉強して"
     te_plain_negative = "勉強しなくて"
     te_polite_positive = "勉強しまして"
+
+    # Ta Forms
+    ta_plain_positive = "勉強した"
+    ta_plain_negative = "勉強しなかった"
+    ta_polite_positive = "勉強しました"
+    ta_polite_negative = "勉強しませんでした"
+
+    # Tari form
+    tari_plain_positive = "勉強したり"
+    tari_plain_negative = "勉強しなくたり"
+    tari_polite_positive = "勉強しましたり"
 
     # Conditional Verb Forms
     conditional_plain_positive = "勉強したら"
@@ -413,20 +479,31 @@ class IrregularVerbKuru:
 
     # Plain Verb Forms
     plain_nonpast_positive = "くる"  # plain positive nonpast
-    plain_past_positive = "きた"  # ta form
     plain_nonpast_negative = "こない"  # nai form
+    plain_past_positive = "きた"  # ta form
     plain_past_negative = "こなかった"  # katta form
 
     # Formal Verb Forms
     polite_nonpast_positive = "きます"
-    polite_past_positive = "きました"
     polite_nonpast_negative = "きません"
+    polite_past_positive = "きました"
     polite_past_negative = "きませんでした"
 
     # Te form (gerund)
     te_plain_positive = "きて"
     te_plain_negative = "こなくて"
     te_polite_positive = "きまして"
+
+    # Ta Forms
+    ta_plain_positive = "きた"  # ta form
+    ta_plain_negative = "こなかった"  # katta form
+    ta_polite_positive = "きました"
+    ta_polite_negative = "きませんでした"
+
+    # Tari form
+    tari_plain_positive = "きたり"
+    tari_plain_negative = "こなくたり"
+    tari_polite_positive = "きましたり"
 
     # Conditional Verb Forms
     conditional_plain_positive = "きたら"
@@ -483,20 +560,31 @@ class IrregularVerbKuruKanji:
 
     # Plain Verb Forms
     plain_nonpast_positive = "来る"
-    plain_past_positive = "来た"
     plain_nonpast_negative = "来ない"
+    plain_past_positive = "来た"
     plain_past_negative = "来なかった"
 
     # Formal Verb Forms
     polite_nonpast_positive = "来ます"
-    polite_past_positive = "来ました"
     polite_nonpast_negative = "来ません"
+    polite_past_positive = "来ました"
     polite_past_negative = "来ませんでした"
 
     # Te form (gerund)
     te_plain_positive = "来て"
     te_plain_negative = "来なくて"
     te_polite_positive = "来まして"
+
+    # Ta Forms
+    ta_plain_positive = "来た"
+    ta_plain_negative = "来なかった"
+    ta_polite_positive = "来ました"
+    ta_polite_negative = "来ませんでした"
+
+    # Tari form
+    tari_plain_positive = "来たり"
+    tari_plain_negative = "来なくたり"
+    tari_polite_positive = "来ましたり"
 
     # Conditional Verb Forms
     conditional_plain_positive = "来たら"
@@ -602,6 +690,8 @@ VERB_FORM_PARAMETERS = [
             VERB_LIST,
             [
                 BaseForm.TE,
+                BaseForm.TA,
+                BaseForm.TARI,
                 BaseForm.CONDITIONAL,
                 BaseForm.VOLITIONAL,
                 BaseForm.POTENTIAL,

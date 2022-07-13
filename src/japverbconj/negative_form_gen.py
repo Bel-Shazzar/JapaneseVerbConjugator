@@ -88,6 +88,29 @@ class NegativeVerbForms:
         return f"{verb_stem}{ending}"
 
     @classmethod
+    def generate_tari_form(cls, verb: str, verb_class: VerbClass, formality: Formality):
+        """Generate the negative tari form of the verb.
+
+        Args:
+            verb (str): Japanese verb in kana, might contain kanji
+            verb_class (enum): VerbClass Enum representing the verb class
+                to which the verb belongs
+            formality (enum): Formality Enum representing the formality for the conjugated verb
+
+        Returns:
+            str: negative tari form of the verb
+        parameter
+        """
+        ending = TARI_FORM_NEGATIVE_ENDING
+        if verb == ARU:
+            verb_stem = ""
+        elif verb_class == VerbClass.GODAN:
+            verb_stem = map_dictionary_to_a_ending(verb)
+        else:
+            verb_stem = get_verb_stem(verb, verb_class)
+        return f"{verb_stem}{ending}"
+
+    @classmethod
     def generate_conditional_form(
         cls, verb: str, verb_class: VerbClass, formality: Formality
     ):

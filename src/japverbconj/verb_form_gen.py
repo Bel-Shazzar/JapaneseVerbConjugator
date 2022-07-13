@@ -3,6 +3,7 @@ from .constants.enumerated_types import (
     CopulaForm,
     Formality,
     Polarity,
+    Tense,
     VerbClass,
 )
 from .constants.irregular_verb_forms import NoConjugationError
@@ -37,6 +38,13 @@ def generate_japanese_copula_by_str(copula_form_str: str, *args):
 def generate_japanese_verb_form(
     verb: str, verb_class: VerbClass, base_form: BaseForm, *args, **kwargs
 ):
+    if base_form == BaseForm.TA:
+        if BaseForm.POLITE in args:
+            base_form = BaseForm.POLITE
+        else:
+            base_form = BaseForm.PLAIN
+        del kwargs["formality"]
+        kwargs["tense"] = Tense.PAST
     if base_form == BaseForm.PLAIN:
         return JapaneseVerbFormGenerator.generate_plain_form(
             verb, verb_class, *args, **kwargs
@@ -49,7 +57,7 @@ def generate_japanese_verb_form(
         return JapaneseVerbFormGenerator.generate_te_form(
             verb, verb_class, *args, **kwargs
         )
-    elif base_form == BaseForm.CONDITIONAL:
+    elif base_form in [BaseForm.CONDITIONAL, BaseForm.TARA]:
         return JapaneseVerbFormGenerator.generate_conditional_form(
             verb, verb_class, *args, **kwargs
         )
@@ -75,6 +83,10 @@ def generate_japanese_verb_form(
         )
     elif base_form == BaseForm.PASSIVE:
         return JapaneseVerbFormGenerator.generate_passive_form(
+            verb, verb_class, *args, **kwargs
+        )
+    elif base_form == BaseForm.TARI:
+        return JapaneseVerbFormGenerator.generate_tari_form(
             verb, verb_class, *args, **kwargs
         )
     else:
@@ -190,6 +202,32 @@ class JapaneseVerbFormGenerator:
         if polarity == Polarity.POSITIVE:
             return cls.positive_verb_forms.generate_te_form(verb, verb_class, formality)
         return cls.negative_verb_forms.generate_te_form(verb, verb_class, formality)
+
+    @classmethod
+    @validate_japanese_verb
+    def generate_tari_form(cls, verb, verb_class, formality, polarity):
+        """Utilize base_te_ta_form function to generate the -tari form
+        of the verb
+
+        Args:
+            verb (str): Japanese verb in kana, might contain kanji
+            verb_class (enum): VerbClass Enum representing the verb class
+                to which the verb belongs
+
+        Returns:
+            str: -tari form of the verb
+        """
+        if verb_class == VerbClass.IRREGULAR:
+            return handle_irregular_verb(
+                verb, BaseForm.TARI, formality=formality, polarity=polarity
+            )
+        if formality == Formality.POLITE and polarity == Polarity.NEGATIVE:
+            raise NoConjugationError("Ther seems to be no polite negativete form...")
+        if polarity == Polarity.POSITIVE:
+            return cls.positive_verb_forms.generate_tari_form(
+                verb, verb_class, formality
+            )
+        return cls.negative_verb_forms.generate_tari_form(verb, verb_class, formality)
 
     @classmethod
     @validate_japanese_verb
