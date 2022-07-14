@@ -84,29 +84,23 @@ def handle_irregular_verb(
     return f"{verb_stem}{ending}"
 
 
-def generate_nai_form(verb, verb_class: VerbClass, is_regular_nai: bool):
-    """Generates the nai form of a Japanese verb
+def generate_negative_stem(verb, verb_class: VerbClass):
+    """Generates the negative stem of a Japanese verb
 
     Args:
         verb (str): Japanese verb in kana, might contain kanji
         verb_class (enum): VerbClass Enum representing the verb class
             to which the verb belongs
-        is_regular_nai (bool): indicates whether to attach nai ending directly
-            to verb param or generate the explicit nai form of a verb. Some
-            verb conjugations require the nai ending without calculating the
-            nai form
 
     Returns:
-        str: nai ending attached to verb param
+        str: negative stem of the verb
     """
-    if not is_regular_nai:
-        return f"{verb}{NAI_ENDING}"
     if verb == ARU:
-        return NAI_ENDING
-    verb_stem = get_verb_stem(verb, verb_class)
+        return ""
     if verb_class == VerbClass.GODAN:
-        verb_stem = map_dictionary_to_a_ending(verb)
-    return f"{verb_stem}{NAI_ENDING}"
+        return map_dictionary_to_a_ending(verb)
+    else:
+        return get_verb_stem(verb, verb_class)
 
 
 def base_te_ta_form(
