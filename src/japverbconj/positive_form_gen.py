@@ -78,7 +78,7 @@ class PositiveVerbForms:
         if formality == Formality.PLAIN:
             return base_te_ta_form(verb, verb_class, TE_PARTICLE, DE_PARTICLE)
         else:
-            ending = TE_FORM_POLITE_ENDING
+            ending = TE_FORM_POLITE_POSITIVE_ENDING
         if verb_class == VerbClass.GODAN:
             if verb in NASARU_GROUP and formality == Formality.POLITE:
                 verb_stem = f"{get_verb_stem(verb, verb_class)}{I_PARTICLE}"
@@ -104,7 +104,7 @@ class PositiveVerbForms:
         if formality == Formality.PLAIN:
             return base_te_ta_form(verb, verb_class, TARI_ENDING, DARI_ENDING)
         else:
-            ending = TARI_FORM_POLITE_ENDING
+            ending = TARI_FORM_POLITE_POSITIVE_ENDING
         if verb_class == VerbClass.GODAN:
             if verb in NASARU_GROUP and formality == Formality.POLITE:
                 verb_stem = f"{get_verb_stem(verb, verb_class)}{I_PARTICLE}"

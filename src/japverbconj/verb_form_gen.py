@@ -36,80 +36,65 @@ def generate_japanese_copula_by_str(copula_form_str: str, *args):
 
 
 def generate_japanese_verb_form(
-    verb: str, verb_class: VerbClass, base_form: BaseForm, *args, **kwargs
+    verb: str, verb_class: VerbClass, base_form: BaseForm, **kwargs
 ):
-    if base_form == BaseForm.TA:
-        if BaseForm.POLITE in args:
-            base_form = BaseForm.POLITE
-        else:
-            base_form = BaseForm.PLAIN
-        del kwargs["formality"]
-        kwargs["tense"] = Tense.PAST
     if base_form == BaseForm.PLAIN:
-        return JapaneseVerbFormGenerator.generate_plain_form(
-            verb, verb_class, *args, **kwargs
-        )
+        return JapaneseVerbFormGenerator.generate_plain_form(verb, verb_class, **kwargs)
     elif base_form == BaseForm.POLITE:
         return JapaneseVerbFormGenerator.generate_polite_form(
-            verb, verb_class, *args, **kwargs
+            verb, verb_class, **kwargs
         )
     elif base_form == BaseForm.TE:
-        return JapaneseVerbFormGenerator.generate_te_form(
-            verb, verb_class, *args, **kwargs
-        )
+        return JapaneseVerbFormGenerator.generate_te_form(verb, verb_class, **kwargs)
+    elif base_form == BaseForm.TA:
+        return JapaneseVerbFormGenerator.generate_ta_form(verb, verb_class, **kwargs)
+    elif base_form == BaseForm.TARI:
+        return JapaneseVerbFormGenerator.generate_tari_form(verb, verb_class, **kwargs)
     elif base_form in [BaseForm.CONDITIONAL, BaseForm.TARA]:
         return JapaneseVerbFormGenerator.generate_conditional_form(
-            verb, verb_class, *args, **kwargs
+            verb, verb_class, **kwargs
         )
     elif base_form == BaseForm.VOLITIONAL:
         return JapaneseVerbFormGenerator.generate_volitional_form(
-            verb, verb_class, *args, **kwargs
+            verb, verb_class, **kwargs
         )
     elif base_form == BaseForm.POTENTIAL:
         return JapaneseVerbFormGenerator.generate_potential_form(
-            verb, verb_class, *args, **kwargs
+            verb, verb_class, **kwargs
         )
     elif base_form == BaseForm.IMPERATIVE:
         return JapaneseVerbFormGenerator.generate_imperative_form(
-            verb, verb_class, *args, **kwargs
+            verb, verb_class, **kwargs
         )
     elif base_form == BaseForm.PROVISIONAL:
         return JapaneseVerbFormGenerator.generate_provisional_form(
-            verb, verb_class, *args, **kwargs
+            verb, verb_class, **kwargs
         )
     elif base_form == BaseForm.CAUSATIVE:
         return JapaneseVerbFormGenerator.generate_causative_form(
-            verb, verb_class, *args, **kwargs
+            verb, verb_class, **kwargs
         )
     elif base_form == BaseForm.PASSIVE:
         return JapaneseVerbFormGenerator.generate_passive_form(
-            verb, verb_class, *args, **kwargs
-        )
-    elif base_form == BaseForm.TARI:
-        return JapaneseVerbFormGenerator.generate_tari_form(
-            verb, verb_class, *args, **kwargs
+            verb, verb_class, **kwargs
         )
     else:
         raise UnsupportedBaseFormError("This BaseForm is not supported.")
 
 
-def generate_japanese_copula_form(copula_form: CopulaForm, *args, **kwargs):
+def generate_japanese_copula_form(copula_form: CopulaForm, **kwargs):
     if copula_form == CopulaForm.PLAIN:
-        return JapaneseVerbFormGenerator.copula.generate_plain_form(*args, **kwargs)
+        return JapaneseVerbFormGenerator.copula.generate_plain_form(**kwargs)
     elif copula_form == CopulaForm.POLITE:
-        return JapaneseVerbFormGenerator.copula.generate_polite_form(*args, **kwargs)
+        return JapaneseVerbFormGenerator.copula.generate_polite_form(**kwargs)
     elif copula_form == CopulaForm.CONDITIONAL:
-        return JapaneseVerbFormGenerator.copula.generate_conditional_form(
-            *args, **kwargs
-        )
+        return JapaneseVerbFormGenerator.copula.generate_conditional_form(**kwargs)
     elif copula_form == CopulaForm.PRESUMPTIVE:
-        return JapaneseVerbFormGenerator.copula.generate_presumptive_form(
-            *args, **kwargs
-        )
+        return JapaneseVerbFormGenerator.copula.generate_presumptive_form(**kwargs)
     elif copula_form == CopulaForm.TE:
-        return JapaneseVerbFormGenerator.copula.generate_te_form(*args, **kwargs)
+        return JapaneseVerbFormGenerator.copula.generate_te_form(**kwargs)
     elif copula_form == CopulaForm.TARA:
-        return JapaneseVerbFormGenerator.copula.generate_tara_form(*args, **kwargs)
+        return JapaneseVerbFormGenerator.copula.generate_tara_form(**kwargs)
     else:
         raise UnsupportedCopulaFormError("This CopulaForm is not supported.")
 
@@ -197,11 +182,31 @@ class JapaneseVerbFormGenerator:
             return handle_irregular_verb(
                 verb, BaseForm.TE, formality=formality, polarity=polarity
             )
-        if formality == Formality.POLITE and polarity == Polarity.NEGATIVE:
-            raise NoConjugationError("Ther seems to be no polite negativete form...")
         if polarity == Polarity.POSITIVE:
             return cls.positive_verb_forms.generate_te_form(verb, verb_class, formality)
         return cls.negative_verb_forms.generate_te_form(verb, verb_class, formality)
+
+    @classmethod
+    @validate_japanese_verb
+    def generate_ta_form(cls, verb, verb_class, formality, polarity):
+        """Convenience method for the past forms
+
+        Args:
+            verb (str): Japanese verb in kana, might contain kanji
+            verb_class (enum): VerbClass Enum representing the verb class
+                to which the verb belongs
+            formality (enum): Formality Enum representing the formality class
+                for the conjugated verb
+            polarity (enum): Polarity Enum representing the polarity for the
+                conjugated verb
+
+        Returns:
+            str: -ta form of the verb
+        """
+        if formality == Formality.PLAIN:
+            return cls.generate_plain_form(verb, verb_class, Tense.PAST, polarity)
+        else:
+            return cls.generate_polite_form(verb, verb_class, Tense.PAST, polarity)
 
     @classmethod
     @validate_japanese_verb
@@ -213,6 +218,10 @@ class JapaneseVerbFormGenerator:
             verb (str): Japanese verb in kana, might contain kanji
             verb_class (enum): VerbClass Enum representing the verb class
                 to which the verb belongs
+            formality (enum): Formality Enum representing the formality class
+                for the conjugated verb
+            polarity (enum): Polarity Enum representing the polarity for the
+                conjugated verb
 
         Returns:
             str: -tari form of the verb
@@ -221,8 +230,6 @@ class JapaneseVerbFormGenerator:
             return handle_irregular_verb(
                 verb, BaseForm.TARI, formality=formality, polarity=polarity
             )
-        if formality == Formality.POLITE and polarity == Polarity.NEGATIVE:
-            raise NoConjugationError("Ther seems to be no polite negativete form...")
         if polarity == Polarity.POSITIVE:
             return cls.positive_verb_forms.generate_tari_form(
                 verb, verb_class, formality

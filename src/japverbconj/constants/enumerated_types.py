@@ -22,7 +22,7 @@ class CopulaForm(Enum):
     POLITE = BaseForm.POLITE.value
     TE = BaseForm.TE.value
     CONDITIONAL = BaseForm.CONDITIONAL.value
-    TARA = "tara"
+    TARA = BaseForm.TARA.value
     PRESUMPTIVE = "pres"
 
 

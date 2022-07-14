@@ -1,11 +1,20 @@
 import unittest
 
+import romkan
 from parameterized import parameterized
-from src.japverbconj.constants.enumerated_types import BaseForm, CopulaForm
-from src.japverbconj.constants.irregular_verb_forms import NoConjugationError
+from src.japverbconj.constants.enumerated_types import (
+    BaseForm,
+    CopulaForm,
+    Formality,
+    IrregularVerb,
+)
 from src.japverbconj.constants.exceptions import (
     UnsupportedBaseFormError,
     UnsupportedCopulaFormError,
+)
+from src.japverbconj.constants.irregular_verb_forms import (
+    NoConjugationError,
+    get_irregular_conjugation,
 )
 from src.japverbconj.verb_form_gen import (
     generate_japanese_copula_by_str,
@@ -60,6 +69,15 @@ class TestAllVerbForms(unittest.TestCase):
     def test_unsupported_base_form_str_error(self):
         with self.assertRaises(UnsupportedBaseFormError):
             generate_japanese_verb_by_str("", None, "no")
+
+    @parameterized.expand([(verb.name.lower(), verb.value) for verb in IrregularVerb])
+    def test_no_irregular_conjugation_error(self, _, verb):
+        with self.assertRaises(
+            NoConjugationError,
+        ):
+            get_irregular_conjugation(
+                verb, base_form=BaseForm.PLAIN, formality=Formality.POLITE
+            )
 
 
 class TestCopula(unittest.TestCase):

@@ -78,11 +78,19 @@ class NegativeVerbForms:
             str: negative te form of the verb
         parameter
         """
-        ending = TE_FORM_NEGATIVE_ENDING
-        if verb == ARU:
+        if formality == Formality.PLAIN:
+            ending = TE_FORM_PLAIN_NEGATIVE_ENDING
+        else:
+            ending = TE_FORM_POLITE_NEGATIVE_ENDING
+        if verb == ARU and formality == Formality.PLAIN:
             verb_stem = ""
         elif verb_class == VerbClass.GODAN:
-            verb_stem = map_dictionary_to_a_ending(verb)
+            if verb in NASARU_GROUP and formality == Formality.POLITE:
+                verb_stem = f"{get_verb_stem(verb, verb_class)}{I_PARTICLE}"
+            elif formality == Formality.POLITE:
+                verb_stem = map_dictionary_to_i_ending(verb)
+            else:
+                verb_stem = map_dictionary_to_a_ending(verb)
         else:
             verb_stem = get_verb_stem(verb, verb_class)
         return f"{verb_stem}{ending}"
@@ -101,11 +109,19 @@ class NegativeVerbForms:
             str: negative tari form of the verb
         parameter
         """
-        ending = TARI_FORM_NEGATIVE_ENDING
-        if verb == ARU:
+        if formality == Formality.PLAIN:
+            ending = TARI_FORM_PLAIN_NEGATIVE_ENDING
+        else:
+            ending = TARI_FORM_POLITE_NEGATIVE_ENDING
+        if verb == ARU and formality == Formality.PLAIN:
             verb_stem = ""
         elif verb_class == VerbClass.GODAN:
-            verb_stem = map_dictionary_to_a_ending(verb)
+            if verb in NASARU_GROUP and formality == Formality.POLITE:
+                verb_stem = f"{get_verb_stem(verb, verb_class)}{I_PARTICLE}"
+            elif formality == Formality.POLITE:
+                verb_stem = map_dictionary_to_i_ending(verb)
+            else:
+                verb_stem = map_dictionary_to_a_ending(verb)
         else:
             verb_stem = get_verb_stem(verb, verb_class)
         return f"{verb_stem}{ending}"

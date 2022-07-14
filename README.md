@@ -11,6 +11,9 @@ Japanese Verb Conjugator conjugates the following verb forms:
 * plain form
 * polite form
 * ~te form
+* ~ta form
+* ~tari form
+* ~tara form
 * conditional form
 * volitional form
 * potential form
@@ -99,6 +102,9 @@ The first string is required and must determine the desired BaseForm from the fo
 BaseForm.PLAIN = "pla"
 BaseForm.POLITE = "pol"
 BaseForm.TE = "te"
+BaseForm.TA = "ta"
+BaseForm.TARI = "tari"
+BaseForm.TARI = "tari"
 BaseForm.CONDITIONAL = "cond"
 BaseForm.VOLITIONAL = "vol"
 BaseForm.POTENTIAL = "pot"
@@ -121,16 +127,13 @@ Polarity.NEGATIVE = "neg"
 ```
 
 * if an argument is left out, the first choice in the list above is assumed
-* the order of the arguments do not matter
+* the order of the arguments does not matter
 * it is not possible to give arguments that are not present in the corresponding BaseForm, see following table for details
 
 | BaseForm | Possible arguments |
 | - | - |
 | BaseForm.PLAIN<br>BaseForm.POLITE | Tense, Polarity |
-| BaseForm.TE*<br>BaseForm.CONDITIONAL<br>BaseForm.VOLITIONAL<br>BaseForm.POTENTIAL<br>BaseForm.IMPERATIVE<br>BaseForm.PROVISIONAL<br>BaseForm.CAUSATIVE<br>BaseForm.PASSIVE | Formality, Polarity |
-
-\* except for Formality.POLITE + Polarity.NEGATIVE - if you know whether and if yes, how this form is built, please [contact](mailto:belshazzar314+japverbconjgen@gmail.com) me!
-
+| BaseForm.TE<br>BaseForm.TA<br>BaseForm.TARI<br>BaseForm.TARA<br>BaseForm.CONDITIONAL<br>BaseForm.VOLITIONAL<br>BaseForm.POTENTIAL<br>BaseForm.IMPERATIVE<br>BaseForm.PROVISIONAL<br>BaseForm.CAUSATIVE<br>BaseForm.PASSIVE | Formality, Polarity |
 
 If you prefer the more rigorous earlier version of calling individual methods for each form, you can still use that like this.
 ```python
@@ -207,7 +210,7 @@ After running the tests with coverage you can show the coverage report like this
 coverage report
 ```
 
-Alternativly you can generate an html representation like this
+Alternatively you can generate an html representation like this
 
 ```bash
 coverage html

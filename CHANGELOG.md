@@ -1,3 +1,7 @@
+## 2022-07-14 (v0.4.0)
+- add ta-, tari- and tara-forms
+- add polite negative te-form with "masendeshita"
+
 ## 2022-07-10 (v0.3.2)
 - add exceptions for [nasaru group](https://conjugator.reverso.net/conjugation-rules-model-japanese/model-%E3%81%AA%E3%81%95%E3%82%8B.html)
 
