@@ -62,7 +62,7 @@ SURU_CONJUGATION[BaseForm.TARI][Formality.PLAIN][Tense.NONPAST][
 ] = "したり"
 SURU_CONJUGATION[BaseForm.TARI][Formality.PLAIN][Tense.NONPAST][
     Polarity.NEGATIVE
-] = "しなくたり"
+] = "しなかったり"
 SURU_CONJUGATION[BaseForm.TARI][Formality.POLITE][Tense.NONPAST][
     Polarity.POSITIVE
 ] = "しましたり"
@@ -227,7 +227,7 @@ KURU_CONJUGATION[BaseForm.TARI][Formality.PLAIN][Tense.NONPAST][
 ] = "きたり"
 KURU_CONJUGATION[BaseForm.TARI][Formality.PLAIN][Tense.NONPAST][
     Polarity.NEGATIVE
-] = "こなくたり"
+] = "こなかったり"
 KURU_CONJUGATION[BaseForm.TARI][Formality.POLITE][Tense.NONPAST][
     Polarity.POSITIVE
 ] = "きましたり"

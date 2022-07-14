@@ -78,15 +78,7 @@ class PositiveVerbForms:
         if formality == Formality.PLAIN:
             return base_te_ta_form(verb, verb_class, TE_PARTICLE, DE_PARTICLE)
         else:
-            ending = TE_FORM_POLITE_POSITIVE_ENDING
-        if verb_class == VerbClass.GODAN:
-            if verb in NASARU_GROUP and formality == Formality.POLITE:
-                verb_stem = f"{get_verb_stem(verb, verb_class)}{I_PARTICLE}"
-            else:
-                verb_stem = map_dictionary_to_i_ending(verb)
-        else:
-            verb_stem = get_verb_stem(verb, verb_class)
-        return f"{verb_stem}{ending}"
+            return f"{cls.generate_polite_form(verb, verb_class, Tense.PAST)[:-1]}{TE_PARTICLE}"
 
     @classmethod
     def generate_tari_form(cls, verb: str, verb_class: VerbClass, formality: Formality):
@@ -102,17 +94,10 @@ class PositiveVerbForms:
             str: -tari form of the verb
         """
         if formality == Formality.PLAIN:
-            return base_te_ta_form(verb, verb_class, TARI_ENDING, DARI_ENDING)
+            verb_stem = base_te_ta_form(verb, verb_class, TA_PARTICLE, DA_PARTICLE)
         else:
-            ending = TARI_FORM_POLITE_POSITIVE_ENDING
-        if verb_class == VerbClass.GODAN:
-            if verb in NASARU_GROUP and formality == Formality.POLITE:
-                verb_stem = f"{get_verb_stem(verb, verb_class)}{I_PARTICLE}"
-            else:
-                verb_stem = map_dictionary_to_i_ending(verb)
-        else:
-            verb_stem = get_verb_stem(verb, verb_class)
-        return f"{verb_stem}{ending}"
+            verb_stem = cls.generate_polite_form(verb, verb_class, Tense.PAST)
+        return f"{verb_stem}{RI_PARTICLE}"
 
     @classmethod
     def generate_conditional_form(
@@ -202,7 +187,7 @@ class PositiveVerbForms:
         else:
             verb_stem = get_verb_stem(verb, verb_class)
             if formality == Formality.PLAIN:
-                ending = POTENTIAL_ICHIDAN_ENDING
+                ending = POTENTIAL_PLAIN_ICHIDAN_ENDING
             else:
                 ending = POTENTIAL_POLITE_ICHIDAN_ENDING
         return f"{verb_stem}{ending}"

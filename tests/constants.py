@@ -37,14 +37,14 @@ class GodanVerbNomu:
     te_polite_negative = "飲みませんでして"
 
     # Ta Forms
-    ta_plain_positive = "飲んだ"
-    ta_plain_negative = "飲まなかった"
-    ta_polite_positive = "飲みました"
-    ta_polite_negative = "飲みませんでした"
+    ta_plain_positive = plain_past_positive
+    ta_plain_negative = plain_past_negative
+    ta_polite_positive = polite_past_positive
+    ta_polite_negative = polite_past_negative
 
     # Tari form
     tari_plain_positive = "飲んだり"
-    tari_plain_negative = "飲まなくたり"
+    tari_plain_negative = "飲まなかったり"
     tari_polite_positive = "飲みましたり"
     tari_polite_negative = "飲みませんでしたり"
 
@@ -53,6 +53,12 @@ class GodanVerbNomu:
     conditional_plain_negative = "飲まなかったら"
     conditional_polite_positive = "飲みましたら"
     conditional_polite_negative = "飲みませんでしたら"
+
+    # Tara form
+    tara_plain_positive = conditional_plain_positive
+    tara_plain_negative = conditional_plain_negative
+    tara_polite_positive = conditional_polite_positive
+    tara_polite_negative = conditional_polite_negative
 
     # Volitional Verb Forms
     volitional_plain_positive = "飲もう"
@@ -114,15 +120,15 @@ class GodanVerbAru:
     te_polite_positive = "ありまして"
     te_polite_negative = "ありませんでして"
 
-    # Ta Froms
-    ta_plain_positive = "あった"
-    ta_plain_negative = "なかった"
-    ta_polite_positive = "ありました"
-    ta_polite_negative = "ありませんでした"
+    # Ta Forms
+    ta_plain_positive = plain_past_positive
+    ta_plain_negative = plain_past_negative
+    ta_polite_positive = polite_past_positive
+    ta_polite_negative = polite_past_negative
 
     # Tari form
     tari_plain_positive = "あったり"
-    tari_plain_negative = "なくたり"
+    tari_plain_negative = "なかったり"
     tari_polite_positive = "ありましたり"
     tari_polite_negative = "ありませんでしたり"
 
@@ -131,6 +137,12 @@ class GodanVerbAru:
     conditional_plain_negative = "なかったら"
     conditional_polite_positive = "ありましたら"
     conditional_polite_negative = "ありませんでしたら"
+
+    # Tara form
+    tara_plain_positive = conditional_plain_positive
+    tara_plain_negative = conditional_plain_negative
+    tara_polite_positive = conditional_polite_positive
+    tara_polite_negative = conditional_polite_negative
 
     # Volitional Verb Forms
     volitional_plain_positive = "あろう"
@@ -192,14 +204,14 @@ class GodanVerbIku:
     te_polite_negative = "行きませんでして"
 
     # Ta Forms
-    ta_plain_positive = "行った"
-    ta_plain_negative = "行かなかった"
-    ta_polite_positive = "行きました"
-    ta_polite_negative = "行きませんでした"
+    ta_plain_positive = plain_past_positive
+    ta_plain_negative = plain_past_negative
+    ta_polite_positive = polite_past_positive
+    ta_polite_negative = polite_past_negative
 
     # Tari form
     tari_plain_positive = "行ったり"
-    tari_plain_negative = "行かなくたり"
+    tari_plain_negative = "行かなかったり"
     tari_polite_positive = "行きましたり"
     tari_polite_negative = "行きませんでしたり"
 
@@ -209,11 +221,17 @@ class GodanVerbIku:
     conditional_polite_positive = "行きましたら"
     conditional_polite_negative = "行きませんでしたら"
 
+    # Tara form
+    tara_plain_positive = conditional_plain_positive
+    tara_plain_negative = conditional_plain_negative
+    tara_polite_positive = conditional_polite_positive
+    tara_polite_negative = conditional_polite_negative
+
     # Volitional Verb Forms
-    volitional_polite_positive = "行きましょう"
-    volitional_polite_negative = "行かないでしょう"
     volitional_plain_positive = "行こう"
     volitional_plain_negative = "行かないだろう"
+    volitional_polite_positive = "行きましょう"
+    volitional_polite_negative = "行かないでしょう"
 
     # Potential Verb Forms
     potential_plain_positive = "行ける"
@@ -269,14 +287,14 @@ class GodanVerbKudasaru:
     te_polite_negative = "くださいませんでして"
 
     # Ta Forms
-    ta_plain_positive = "くださった"
-    ta_plain_negative = "くださらなかった"
-    ta_polite_positive = "くださいました"
-    ta_polite_negative = "くださいませんでした"
+    ta_plain_positive = plain_past_positive
+    ta_plain_negative = plain_past_negative
+    ta_polite_positive = polite_past_positive
+    ta_polite_negative = polite_past_negative
 
     # Tari form
     tari_plain_positive = "くださったり"
-    tari_plain_negative = "くださらなくたり"
+    tari_plain_negative = "くださらなかったり"
     tari_polite_positive = "くださいましたり"
     tari_polite_negative = "くださいませんでしたり"
 
@@ -285,6 +303,12 @@ class GodanVerbKudasaru:
     conditional_plain_negative = "くださらなかったら"
     conditional_polite_positive = "くださいましたら"
     conditional_polite_negative = "くださいませんでしたら"
+
+    # Tara form
+    tara_plain_positive = conditional_plain_positive
+    tara_plain_negative = conditional_plain_negative
+    tara_polite_positive = conditional_polite_positive
+    tara_polite_negative = conditional_polite_negative
 
     # Volitional Verb Forms
     volitional_plain_positive = "くださろう"
@@ -347,14 +371,14 @@ class IchidanVerbTaberu:
     te_polite_negative = "食べませんでして"
 
     # Ta Forms
-    ta_plain_positive = "食べた"
-    ta_plain_negative = "食べなかった"
-    ta_polite_positive = "食べました"
-    ta_polite_negative = "食べませんでした"
+    ta_plain_positive = plain_past_positive
+    ta_plain_negative = plain_past_negative
+    ta_polite_positive = polite_past_positive
+    ta_polite_negative = polite_past_negative
 
     # Tari form
     tari_plain_positive = "食べたり"
-    tari_plain_negative = "食べなくたり"
+    tari_plain_negative = "食べなかったり"
     tari_polite_positive = "食べましたり"
     tari_polite_negative = "食べませんでしたり"
 
@@ -363,6 +387,12 @@ class IchidanVerbTaberu:
     conditional_plain_negative = "食べなかったら"
     conditional_polite_positive = "食べましたら"
     conditional_polite_negative = "食べませんでしたら"
+
+    # Tara form
+    tara_plain_positive = conditional_plain_positive
+    tara_plain_negative = conditional_plain_negative
+    tara_polite_positive = conditional_polite_positive
+    tara_polite_negative = conditional_polite_negative
 
     # Volitional Verb Forms
     volitional_plain_positive = "食べよう"
@@ -425,33 +455,34 @@ class IrregularVerbSuru:
     te_polite_negative = "勉強しませんでして"
 
     # Ta Forms
-    ta_plain_positive = "勉強した"
-    ta_plain_negative = "勉強しなかった"
-    ta_polite_positive = "勉強しました"
-    ta_polite_negative = "勉強しませんでした"
+    ta_plain_positive = plain_past_positive
+    ta_plain_negative = plain_past_negative
+    ta_polite_positive = polite_past_positive
+    ta_polite_negative = polite_past_negative
 
     # Tari form
     tari_plain_positive = "勉強したり"
-    tari_plain_negative = "勉強しなくたり"
+    tari_plain_negative = "勉強しなかったり"
     tari_polite_positive = "勉強しましたり"
     tari_polite_negative = "勉強しませんでしたり"
 
     # Conditional Verb Forms
     conditional_plain_positive = "勉強したら"
-    conditional_polite_positive = "勉強しましたら"
     conditional_plain_negative = "勉強しなかったら"
+    conditional_polite_positive = "勉強しましたら"
     conditional_polite_negative = "勉強しませんでしたら"
+
+    # Tara form
+    tara_plain_positive = conditional_plain_positive
+    tara_plain_negative = conditional_plain_negative
+    tara_polite_positive = conditional_polite_positive
+    tara_polite_negative = conditional_polite_negative
 
     # Volitional Verb Forms
     volitional_plain_positive = "勉強しよう"
     volitional_polite_positive = "勉強しましょう"
     volitional_plain_negative = "勉強しないだろう"
     volitional_polite_negative = "勉強しないでしょう"
-
-    # volitional_plain_past_positive = "勉強したろう"
-    # volitional_polite_past_positive = "勉強しましたろう"
-    # volitional_plain_past_negative = "勉強しなかっただろう"
-    # volitional_polite_past_negative = "勉強しなかたでしょう"
 
     # Potential Verb Forms
     potential_plain_positive = "勉強できる"
@@ -508,14 +539,14 @@ class IrregularVerbKuru:
     te_polite_negative = "きませんでして"
 
     # Ta Forms
-    ta_plain_positive = "きた"
-    ta_plain_negative = "こなかった"
-    ta_polite_positive = "きました"
-    ta_polite_negative = "きませんでした"
+    ta_plain_positive = plain_past_positive
+    ta_plain_negative = plain_past_negative
+    ta_polite_positive = polite_past_positive
+    ta_polite_negative = polite_past_negative
 
     # Tari form
     tari_plain_positive = "きたり"
-    tari_plain_negative = "こなくたり"
+    tari_plain_negative = "こなかったり"
     tari_polite_positive = "きましたり"
     tari_polite_negative = "きませんでしたり"
 
@@ -525,16 +556,17 @@ class IrregularVerbKuru:
     conditional_polite_positive = "きましたら"
     conditional_polite_negative = "きませんでしたら"
 
+    # Tara form
+    tara_plain_positive = conditional_plain_positive
+    tara_plain_negative = conditional_plain_negative
+    tara_polite_positive = conditional_polite_positive
+    tara_polite_negative = conditional_polite_negative
+
     # Volitional Verb Forms
     volitional_polite_positive = "きましょう"
     volitional_polite_negative = "こないでしょう"
     volitional_plain_positive = "こよう"
     volitional_plain_negative = "こないだろう"
-
-    # volitional_plain_past_positive = "きたろう"
-    # volitional_polite_past_positive = "きたでしょう"
-    # volitional_plain_past_negative = "こなかっただろう"
-    # volitional_polite_past_negative = "こなかったでしょう"
 
     # Potential Verb Forms
     potential_plain_positive = "こられる"
@@ -591,14 +623,14 @@ class IrregularVerbKuruKanji:
     te_polite_negative = "来ませんでして"
 
     # Ta Forms
-    ta_plain_positive = "来た"
-    ta_plain_negative = "来なかった"
-    ta_polite_positive = "来ました"
-    ta_polite_negative = "来ませんでした"
+    ta_plain_positive = plain_past_positive
+    ta_plain_negative = plain_past_negative
+    ta_polite_positive = polite_past_positive
+    ta_polite_negative = polite_past_negative
 
     # Tari form
     tari_plain_positive = "来たり"
-    tari_plain_negative = "来なくたり"
+    tari_plain_negative = "来なかったり"
     tari_polite_positive = "来ましたり"
     tari_polite_negative = "来ませんでしたり"
 
@@ -608,16 +640,17 @@ class IrregularVerbKuruKanji:
     conditional_polite_positive = "来ましたら"
     conditional_polite_negative = "来ませんでしたら"
 
+    # Tara form
+    tara_plain_positive = conditional_plain_positive
+    tara_plain_negative = conditional_plain_negative
+    tara_polite_positive = conditional_polite_positive
+    tara_polite_negative = conditional_polite_negative
+
     # Volitional Verb Forms
     volitional_plain_positive = "来よう"
     volitional_plain_negative = "来ないだろう"
     volitional_polite_positive = "来ましょう"
     volitional_polite_negative = "来ないでしょう"
-
-    # volitional_plain_past_positive = "来たろう"
-    # volitional_polite_past_positive = "来たでしょう"
-    # volitional_plain_past_negative = "来なかっただろう"
-    # volitional_polite_past_negative = "来なかったでしょう"
 
     # Potential Verb Forms
     potential_plain_positive = "来られる"
@@ -708,6 +741,7 @@ VERB_FORM_PARAMETERS = [
                 BaseForm.TE,
                 BaseForm.TA,
                 BaseForm.TARI,
+                BaseForm.TARA,
                 BaseForm.CONDITIONAL,
                 BaseForm.VOLITIONAL,
                 BaseForm.POTENTIAL,

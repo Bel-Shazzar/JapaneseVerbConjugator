@@ -6,10 +6,9 @@ from .constants.enumerated_types import (
     Tense,
     VerbClass,
 )
-from .constants.irregular_verb_forms import NoConjugationError
+from .constants.exceptions import UnsupportedBaseFormError, UnsupportedCopulaFormError
 from .copula_gen import CopulaGenerator
 from .decorators import validate_japanese_verb
-from .constants.exceptions import UnsupportedBaseFormError, UnsupportedCopulaFormError
 from .negative_form_gen import NegativeVerbForms
 from .positive_form_gen import PositiveVerbForms
 from .utils import convert_args, convert_copula_args, handle_irregular_verb
@@ -50,7 +49,9 @@ def generate_japanese_verb_form(
         return JapaneseVerbFormGenerator.generate_ta_form(verb, verb_class, **kwargs)
     elif base_form == BaseForm.TARI:
         return JapaneseVerbFormGenerator.generate_tari_form(verb, verb_class, **kwargs)
-    elif base_form in [BaseForm.CONDITIONAL, BaseForm.TARA]:
+    elif base_form == BaseForm.TARA:
+        return JapaneseVerbFormGenerator.generate_tara_form(verb, verb_class, **kwargs)
+    elif base_form == BaseForm.CONDITIONAL:
         return JapaneseVerbFormGenerator.generate_conditional_form(
             verb, verb_class, **kwargs
         )
@@ -235,6 +236,26 @@ class JapaneseVerbFormGenerator:
                 verb, verb_class, formality
             )
         return cls.negative_verb_forms.generate_tari_form(verb, verb_class, formality)
+
+    @classmethod
+    @validate_japanese_verb
+    def generate_tara_form(cls, verb, verb_class, formality, polarity):
+        """Utilize base_te_ta_form function to generate the -tara form
+        of the verb
+
+        Args:
+            verb (str): Japanese verb in kana, might contain kanji
+            verb_class (enum): VerbClass Enum representing the verb class
+                to which the verb belongs
+            formality (enum): Formality Enum representing the formality class
+                for the conjugated verb
+            polarity (enum): Polarity Enum representing the polarity for the
+                conjugated verb
+
+        Returns:
+            str: -tara form of the verb
+        """
+        return cls.generate_conditional_form(verb, verb_class, formality, polarity)
 
     @classmethod
     @validate_japanese_verb
