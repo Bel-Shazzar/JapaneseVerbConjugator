@@ -1,5 +1,6 @@
 from itertools import product
-from src.japverbconj.constants.enumerated_types import (
+
+from japanese_verb_conjugator_v2.constants.enumerated_types import (
     BaseForm,
     CopulaForm,
     Formality,

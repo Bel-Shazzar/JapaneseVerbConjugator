@@ -1,3 +1,29 @@
+[tool.poetry]
+name = "japanese-verb-conjugator-v2"
+version = "0.4.0"
+description = "Fork of the project https://github.com/jshiohaha/JapaneseVerbConjugator"
+authors = ["Jacob Shiohira"]
+license = "BSD"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+python-romkan-ng = "^0.3.0"
+
+[tool.poetry.group.dev]
+optional = true
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.10.0"
+
+[tool.poetry.group.test]
+optional = true
+
+[tool.poetry.group.test.dependencies]
+coverage = "^7.6"
+parameterized = "0.9"
+
+
 [build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

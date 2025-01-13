@@ -1,9 +1,13 @@
 import unittest
 
-from src.japverbconj.constants.enumerated_types import Polarity, Tense, VerbClass
-from src.japverbconj.constants.particle_constants import KU_PARTICLE
-from src.japverbconj.decorators import *
-from src.japverbconj.verb_form_gen import JapaneseVerbFormGenerator as jvfg
+from japanese_verb_conjugator_v2.constants.enumerated_types import (
+    Polarity,
+    Tense,
+    VerbClass,
+)
+from japanese_verb_conjugator_v2.constants.particle_constants import KU_PARTICLE
+from japanese_verb_conjugator_v2.decorators import *
+from japanese_verb_conjugator_v2.verb_form_gen import JapaneseVerbFormGenerator as jvfg
 
 from .constants import (
     GodanVerbNomu,

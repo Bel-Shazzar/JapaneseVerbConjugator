@@ -1,8 +1,11 @@
 import unittest
 
-from src.japverbconj.constants.exceptions import NonIrregularVerbError
-from src.japverbconj.constants.particle_constants import DA_PARTICLE, TA_PARTICLE
-from src.japverbconj.utils import *
+from japanese_verb_conjugator_v2.constants.exceptions import NonIrregularVerbError
+from japanese_verb_conjugator_v2.constants.particle_constants import (
+    DA_PARTICLE,
+    TA_PARTICLE,
+)
+from japanese_verb_conjugator_v2.utils import *
 
 from .constants import GodanVerbNomu
 

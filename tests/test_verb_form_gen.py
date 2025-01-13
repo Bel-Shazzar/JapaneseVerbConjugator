@@ -2,21 +2,22 @@ import unittest
 
 import romkan
 from parameterized import parameterized
-from src.japverbconj.constants.enumerated_types import (
+
+from japanese_verb_conjugator_v2.constants.enumerated_types import (
     BaseForm,
     CopulaForm,
     Formality,
     IrregularVerb,
 )
-from src.japverbconj.constants.exceptions import (
+from japanese_verb_conjugator_v2.constants.exceptions import (
     UnsupportedBaseFormError,
     UnsupportedCopulaFormError,
 )
-from src.japverbconj.constants.irregular_verb_forms import (
+from japanese_verb_conjugator_v2.constants.irregular_verb_forms import (
     NoConjugationError,
     get_irregular_conjugation,
 )
-from src.japverbconj.verb_form_gen import (
+from japanese_verb_conjugator_v2.verb_form_gen import (
     generate_japanese_copula_by_str,
     generate_japanese_copula_form,
     generate_japanese_verb_by_str,
