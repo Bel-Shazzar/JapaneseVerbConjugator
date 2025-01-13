@@ -1,3 +1,11 @@
+## 2025-01-13 (v1.0.0)
+- use poetry for dependecies
+- add support vor python <= 3.12
+- remove support for python <= 3.7
+- improve import possibilities
+- add readme tests
+- update black to 24.10
+
 ## 2022-07-14 (v0.4.0)
 - add ta-, tari- and tara-forms
 - add polite negative te-form with "masendeshita"

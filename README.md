@@ -1,8 +1,8 @@
 # Japanese Verb Conjugator
 
 Japanese Verb Conjugator is a Python library for conjugating Japanese verbs. 
-This fork is used to fix some Issues in the usage of the base package.
-Changes will be recorded in CHANGELOG.md
+This fork overhauled most of the base package at this point.
+Changes are recorded in CHANGELOG.md.
 
 ### What forms will Japanese Verb Conjugator conjugate?
 
@@ -49,14 +49,6 @@ After installing and activating the virtual environment, run the following comma
 ```bash
 pip install japanese-verb-conjugator-v2
 ```
-#### Note
-Pip may display an error during installation that includes the following message. 
-
-```
-No matching distribution found for romkan (from JapaneseVerbConjugator)
-```
-
-In this case, run the command `pip install romkan` and then run `pip install japanese-verb-conjugator-v2` again.
 
 You should be good to go! See the **Usage** section on how to get started using the library.
 
@@ -68,17 +60,11 @@ Go to the directory you want to clone this repository and run the following comm
 git clone https://github.com/Bel-Shazzar/JapaneseVerbConjugator.git
 ```
 
-
 To install the Library use the following command
 
 ```bash
-pip install .
-```
-
-To run the library you should install the dependencies in `requirements.txt`.
-
-```bash
-pip install -r requirements.txt
+pip intall poetry
+poetry install [--with dev,test]
 ```
 
 You should be good to go! See the **Usage** section on how to get started using the library.
@@ -88,8 +74,7 @@ You should be good to go! See the **Usage** section on how to get started using 
 The easiest to use method is the following:
 
 ```python
-from japverbconj.constants.enumerated_types import VerbClass
-from japverbconj.verb_form_gen import generate_japanese_verb_by_str
+from japanese_verb_conjugator_v2 import VerbClass, generate_japanese_verb_by_str
 
 generate_japanese_verb_by_str("飲む", VerbClass.GODAN, "pla") # returns '飲む
 generate_japanese_verb_by_str("飲む", VerbClass.GODAN, "pla", "past", "neg") # returns '飲まなかった'
@@ -137,8 +122,7 @@ Polarity.NEGATIVE = "neg"
 
 If you prefer the more rigorous earlier version of calling individual methods for each form, you can still use that like this.
 ```python
-from japverbconj.constants.enumerated_types import Formality, Polarity, Tense, VerbClass
-from japverbconj.verb_form_gen import JapaneseVerbFormGenerator as jvfg
+from japanese_verb_conjugator_v2 import Formality, Polarity, Tense, VerbClass, JapaneseVerbFormGenerator as jvfg
 
 jvfg.generate_plain_form("飲む", VerbClass.GODAN, Tense.NONPAST, Polarity.POSITIVE) # returns '飲む'
 jvfg.generate_plain_form("飲む", VerbClass.GODAN, Tense.NONPAST, Polarity.NEGATIVE) # returns '飲まない'
@@ -151,9 +135,9 @@ The library will try to help validate the correctness of the verb by checking fo
 Generation of copula forms works similarly:
 
 ```python
-from japverbconj.verb_form_gen import generate_japanese_copula_by_str
+from japanese_verb_conjugator_v2 import generate_japanese_copula_by_str
 
-generate_japanese_copula_by_str("plain") # returns 'だ'
+generate_japanese_copula_by_str("pla") # returns 'だ'
 generate_japanese_copula_by_str("pres", "pol", "neg") # returns 'ではないでしょう'
 ```
 
@@ -180,8 +164,7 @@ The following strings can be of the corresponding arguments
 The original way of calling individual methods also remains.
 
 ```python 
-from japverbconj.constants.enumerated_types import Formality, Polarity, Tense, VerbClass
-from japverbconj.verb_form_gen import JapaneseVerbFormGenerator as jvfg
+from japanese_verb_conjugator_v2 import Formality, Polarity, Tense, VerbClass, JapaneseVerbFormGenerator as jvfg
 
 jvfg.copula.generate_plain_form(Tense.NONPAST, Polarity.POSITIVE) # returns 'だ'
 jvfg.copula.generate_presumptive_form(Formality.POLITE, Polarity.NEGATIVE) # returns 'ではないでしょう'
@@ -193,27 +176,27 @@ The coverage package is used to run the unittests. The configuration is defined 
 To run the tests, first install the testing requirements
 
 ```bash
-pip install -r test/requirements.txt
+poetry install --with test
 ```
 
 ### Run tests
 You can run the tests like this
 
 ```bash
-coverage run -m unittest
+poetry run coverage run -m unittest
 ```
 
 #### View coverage report
 After running the tests with coverage you can show the coverage report like this
 
 ```bash
-coverage report
+poetry run coverage report
 ```
 
 Alternatively you can generate an html representation like this
 
 ```bash
-coverage html
+poetry run coverage html
 ```
 
 You can open the html in a browser like this
@@ -228,4 +211,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Please make sure to update tests as appropriate.
 
 ## License
-This project uses a Python package named `romkan`, which has a BSD license. This project therefore has a [BSD](https://choosealicense.com/licenses/bsd/) license.
+This project is licensed under the [BSD](https://choosealicense.com/licenses/bsd/) license.
