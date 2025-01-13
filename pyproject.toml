@@ -1,13 +1,30 @@
 [tool.poetry]
 name = "japanese-verb-conjugator-v2"
-version = "0.4.0"
+version = "1.0.0"
 description = "Fork of the project https://github.com/jshiohaha/JapaneseVerbConjugator"
 authors = ["Jacob Shiohira"]
+maintainers = ["Markus Kruse <belshazzar314@gmail.com>"]
 license = "BSD"
 readme = "README.md"
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Topic :: Text Processing :: Linguistic",
+
+  "License :: OSI Approved :: BSD License",
+
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
+keywords = ["japanese", "verb", "conjugation", "romaji", "hiragana", "katakana", "kanji"]
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.9"
 python-romkan-ng = "^0.3.0"
 
 [tool.poetry.group.dev]
