@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.6","3.7","3.8", "3.9", "3.10"]
+        python-version: ["3.8", "3.9", "3.10", "3.11","3.12"]
 
     steps:
     - uses: actions/checkout@v3
@@ -27,14 +27,13 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        python -m pip install black
-        pip install -r requirements.txt
-        pip install -r tests/requirements.txt
+        python -m pip install poetry
+        poetry install --with dev,test
     - name: Lint with black
       run: |
         # stop the build if there are Python syntax errors or undefined names
-        black . --check
+        poetry run black . --check
     - name: Test with coverage
       run: |
-        coverage run -m unittest
-        coverage report
+        poetry run coverage run -m unittest
+        poetry run coverage report

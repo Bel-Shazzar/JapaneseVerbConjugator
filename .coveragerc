@@ -1,6 +1,6 @@
 [run]
 branch = True
-source = src/
+source = japanese_verb_conjugator_v2/
 
 [report]
 skip_empty = True

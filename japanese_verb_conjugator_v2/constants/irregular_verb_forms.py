@@ -29,7 +29,9 @@ SURU_CONJUGATION[BaseForm.PLAIN][Formality.PLAIN][Tense.NONPAST][
 SURU_CONJUGATION[BaseForm.PLAIN][Formality.PLAIN][Tense.NONPAST][
     Polarity.NEGATIVE
 ] = "しない"
-SURU_CONJUGATION[BaseForm.PLAIN][Formality.PLAIN][Tense.PAST][Polarity.POSITIVE] = "した"
+SURU_CONJUGATION[BaseForm.PLAIN][Formality.PLAIN][Tense.PAST][
+    Polarity.POSITIVE
+] = "した"
 SURU_CONJUGATION[BaseForm.PLAIN][Formality.PLAIN][Tense.PAST][
     Polarity.NEGATIVE
 ] = "しなかった"
@@ -46,7 +48,9 @@ SURU_CONJUGATION[BaseForm.POLITE][Formality.POLITE][Tense.PAST][
     Polarity.NEGATIVE
 ] = "しませんでした"
 
-SURU_CONJUGATION[BaseForm.TE][Formality.PLAIN][Tense.NONPAST][Polarity.POSITIVE] = "して"
+SURU_CONJUGATION[BaseForm.TE][Formality.PLAIN][Tense.NONPAST][
+    Polarity.POSITIVE
+] = "して"
 SURU_CONJUGATION[BaseForm.TE][Formality.PLAIN][Tense.NONPAST][
     Polarity.NEGATIVE
 ] = "しなくて"
@@ -193,7 +197,9 @@ KURU_CONJUGATION[BaseForm.PLAIN][Formality.PLAIN][Tense.NONPAST][
 KURU_CONJUGATION[BaseForm.PLAIN][Formality.PLAIN][Tense.NONPAST][
     Polarity.NEGATIVE
 ] = "こない"
-KURU_CONJUGATION[BaseForm.PLAIN][Formality.PLAIN][Tense.PAST][Polarity.POSITIVE] = "きた"
+KURU_CONJUGATION[BaseForm.PLAIN][Formality.PLAIN][Tense.PAST][
+    Polarity.POSITIVE
+] = "きた"
 KURU_CONJUGATION[BaseForm.PLAIN][Formality.PLAIN][Tense.PAST][
     Polarity.NEGATIVE
 ] = "こなかった"
@@ -211,7 +217,9 @@ KURU_CONJUGATION[BaseForm.POLITE][Formality.POLITE][Tense.PAST][
     Polarity.NEGATIVE
 ] = "きませんでした"
 
-KURU_CONJUGATION[BaseForm.TE][Formality.PLAIN][Tense.NONPAST][Polarity.POSITIVE] = "きて"
+KURU_CONJUGATION[BaseForm.TE][Formality.PLAIN][Tense.NONPAST][
+    Polarity.POSITIVE
+] = "きて"
 KURU_CONJUGATION[BaseForm.TE][Formality.PLAIN][Tense.NONPAST][
     Polarity.NEGATIVE
 ] = "こなくて"
