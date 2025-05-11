@@ -1,3 +1,6 @@
+## 2025-01-13 (v1.0.1)
+- return kanji when conjugating "suru" in potential form (できる -> 出来る)
+
 ## 2025-01-13 (v1.0.0)
 - use poetry for dependecies
 - add support vor python <= 3.12

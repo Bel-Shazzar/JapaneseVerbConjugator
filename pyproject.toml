@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "japanese-verb-conjugator-v2"
-version = "1.0.0"
+version = "1.0.1"
 description = "Fork of the project https://github.com/jshiohaha/JapaneseVerbConjugator"
 authors = ["Jacob Shiohira"]
 maintainers = ["Markus Kruse <belshazzar314@gmail.com>"]

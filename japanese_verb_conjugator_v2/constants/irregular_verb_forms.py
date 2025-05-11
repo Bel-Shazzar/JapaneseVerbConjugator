@@ -102,28 +102,28 @@ SURU_CONJUGATION[BaseForm.VOLITIONAL][Formality.POLITE][Tense.NONPAST][
 
 SURU_CONJUGATION[BaseForm.POTENTIAL][Formality.PLAIN][Tense.NONPAST][
     Polarity.POSITIVE
-] = "できる"
+] = "出来る"
 SURU_CONJUGATION[BaseForm.POTENTIAL][Formality.PLAIN][Tense.NONPAST][
     Polarity.NEGATIVE
-] = "できない"
+] = "出来ない"
 SURU_CONJUGATION[BaseForm.POTENTIAL][Formality.PLAIN][Tense.PAST][
     Polarity.POSITIVE
-] = "できた"
+] = "出来た"
 SURU_CONJUGATION[BaseForm.POTENTIAL][Formality.PLAIN][Tense.PAST][
     Polarity.NEGATIVE
-] = "できなかった"
+] = "出来なかった"
 SURU_CONJUGATION[BaseForm.POTENTIAL][Formality.POLITE][Tense.NONPAST][
     Polarity.POSITIVE
-] = "できます"
+] = "出来ます"
 SURU_CONJUGATION[BaseForm.POTENTIAL][Formality.POLITE][Tense.NONPAST][
     Polarity.NEGATIVE
-] = "できません"
+] = "出来ません"
 SURU_CONJUGATION[BaseForm.POTENTIAL][Formality.POLITE][Tense.PAST][
     Polarity.POSITIVE
-] = "できました"
+] = "出来ました"
 SURU_CONJUGATION[BaseForm.POTENTIAL][Formality.POLITE][Tense.PAST][
     Polarity.NEGATIVE
-] = "できませんでした"
+] = "出来ませんでした"
 
 SURU_CONJUGATION[BaseForm.CAUSATIVE][Formality.PLAIN][Tense.NONPAST][
     Polarity.POSITIVE

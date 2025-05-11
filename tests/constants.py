@@ -486,10 +486,10 @@ class IrregularVerbSuru:
     volitional_polite_negative = "勉強しないでしょう"
 
     # Potential Verb Forms
-    potential_plain_positive = "勉強できる"
-    potential_plain_negative = "勉強できない"
-    potential_polite_positive = "勉強できます"
-    potential_polite_negative = "勉強できません"
+    potential_plain_positive = "勉強出来る"
+    potential_plain_negative = "勉強出来ない"
+    potential_polite_positive = "勉強出来ます"
+    potential_polite_negative = "勉強出来ません"
 
     # Imperative Verb Forms
     imperative_plain_positive = "勉強しろ"
